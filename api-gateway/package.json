@@ -1,0 +1,25 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "Api Gateway para el ejemplo de aplicación PERSONAS-PROYECTOS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrivas/api-gateway.git"
+  },
+  "author": "Víctor Rivas <vrivas@ujaen.es>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vrivas/api-gateway/issues"
+  },
+  "homepage": "https://github.com/vrivas/api-gateway#readme",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "jasmine": "^4.5.0",
+    "supertest": "^6.3.3"
+  }
+}

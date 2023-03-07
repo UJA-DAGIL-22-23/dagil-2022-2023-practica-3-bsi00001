@@ -1,0 +1,29 @@
+{
+  "name": "ms-personas",
+  "version": "1.0.0",
+  "description": "Microservicio encargado de la BBDD de PERSONAS para la aplicación PERSONAS-PROYECTOS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrivas/ms-personas.git"
+  },
+  "author": "Víctor Rivas <vrivas@ujaen.es>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vrivas/ms-personas/issues"
+  },
+  "homepage": "https://github.com/vrivas/ms-personas#readme",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "jasmine": "^4.5.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "faunadb": "^4.7.1",
+    "jsdoc": "^4.0.0"
+  }
+}

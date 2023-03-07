@@ -1,0 +1,27 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "Front-end para la aplicación de miscroservicios",
+  "main": "server.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrivas/front-end.git"
+  },
+  "author": "Victor M. Rivas <vrivas@ujaen.es>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vrivas/front-end/issues"
+  },
+  "homepage": "https://github.com/vrivas/front-end#readme",
+  "devDependencies": {
+    "jasmine": "^4.5.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsdoc": "^4.0.0",
+    "routes": "^2.1.0"
+  }
+}
