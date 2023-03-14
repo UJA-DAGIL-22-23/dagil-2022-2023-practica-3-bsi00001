@@ -454,3 +454,254 @@ Además, incluye documentación sobre dicho código y un vídeo descriptivo de c
 ![Captura de pantalla de la página en la que aparece la colección](./assets/img/Coleccion.png)
 *Captura de pantalla de la página en la que aparece la colección* &#8593;
 
+## Contenido de los documentos 
+
+### **El primero documento**
+```
+{
+  nombre_completo: {
+    nombre: "Bader",
+    apellidos: "Irheem"
+  },
+  fecha_nacimiento: {
+    dia: 17,
+    mes: 8,
+    año: 2000
+  },
+  direccion: {
+    calle: "Calle San Antonio",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2000, 2003, 2006, 2010, 2020],
+  numero_particiapciones_Juegos_olimpicos: 5,
+  color_cinturon: "Negro",
+  nombre_gimnasio: "Gimnasio de los ingenieros"
+}
+```
+
+### **El segundo documento**
+```
+{
+  nombre_completo: {
+    nombre: "Abdulaziz",
+    apellidos: "Irheem"
+  },
+  fecha_nacimiento: {
+    dia: 18,
+    mes: 11,
+    año: 1998
+  },
+  direccion: {
+    calle: "Calle Justicia",
+    localidad: "Puente Genil",
+    provincia: "Cordoba",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2000, 2006],
+  numero_particiapciones_Juegos_olimpicos: 2,
+  color_cinturon: "Amarillo",
+  nombre_gimnasio: "Kung Fu los chulos"
+}
+```
+
+### **El tercer documento**
+```
+{
+  nombre_completo: {
+    nombre: "Mohammed",
+    apellidos: "Irheem"
+  },
+  fecha_nacimiento: {
+    dia: 17,
+    mes: 5,
+    año: 2002
+  },
+  direccion: {
+    calle: "Calle Justicia",
+    localidad: "Granada",
+    provincia: "Granada",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2003],
+  numero_particiapciones_Juegos_olimpicos: 1,
+  color_cinturon: "Naranja",
+  nombre_gimnasio: "Gimnasio de los economistas"
+}
+```
+
+### **El cuarto documento**
+```
+{
+  nombre_completo: {
+    nombre: "Victor Manuel",
+    apellidos: "Rivas Santos"
+  },
+  fecha_nacimiento: {
+    dia: 17,
+    mes: 8,
+    año: 1970
+  },
+  direccion: {
+    calle: "Calle universidad de jaen",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [1989, 2000, 2006],
+  numero_particiapciones_Juegos_olimpicos: 3,
+  color_cinturon: "Marrón",
+  nombre_gimnasio: "Gimnasio de los profesores fuertes"
+}
+```
+
+### **El quinto documento**
+```
+{
+  nombre_completo: {
+    nombre: "Gema",
+    apellidos: "Parra Cabrera"
+  },
+  fecha_nacimiento: {
+    dia: 17,
+    mes: 8,
+    año: 1990
+  },
+  direccion: {
+    calle: "Calle universidad de jaen",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [1999, 2003],
+  numero_particiapciones_Juegos_olimpicos: 2,
+  color_cinturon: "Marrón",
+  nombre_gimnasio: "Gimnasio de los profesores fuertes"
+}
+```
+
+### **El sexto documento**
+```
+{
+  nombre_completo: {
+    nombre: "Modesto",
+    apellidos: "Monzon Vazquez"
+  },
+  fecha_nacimiento: {
+    dia: 10,
+    mes: 1,
+    año: 2000
+  },
+  direccion: {
+    calle: "Calle Del Doctor Eduardo",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2016],
+  numero_particiapciones_Juegos_olimpicos: 1,
+  color_cinturon: "Blanco",
+  nombre_gimnasio: "Gimnasio de los ingenieros"
+}
+```
+
+### **El septemo documento**
+```
+{
+  nombre_completo: {
+    nombre: "Elena",
+    apellidos: "Alonso Tejederas"
+  },
+  fecha_nacimiento: {
+    dia: 11,
+    mes: 1,
+    año: 2000
+  },
+  direccion: {
+    calle: "Calle universidad de jaen",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2000, 2003, 2006, 2010],
+  numero_particiapciones_Juegos_olimpicos: 4,
+  color_cinturon: "Verde",
+  nombre_gimnasio: "Gimnasio de los ingenieros"
+}
+```
+
+### **El octavo documento**
+```
+{
+  nombre_completo: {
+    nombre: "Lorena",
+    apellidos: "Moreno Vilches"
+  },
+  fecha_nacimiento: {
+    dia: 17,
+    mes: 8,
+    año: 2000
+  },
+  direccion: {
+    calle: "Calle otro pueblo",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2000, 2003, 2006, 2009, 2012, 2015],
+  numero_particiapciones_Juegos_olimpicos: 6,
+  color_cinturon: "Azul",
+  nombre_gimnasio: "Gimnasio de los ingenieros"
+}
+```
+
+### **El noveno documento**
+```
+{
+  nombre_completo: {
+    nombre: "Irene",
+    apellidos: "Rubiales Arguelles"
+  },
+  fecha_nacimiento: {
+    dia: 1,
+    mes: 1,
+    año: 2001
+  },
+  direccion: {
+    calle: "Calle el desconocido",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2006],
+  numero_particiapciones_Juegos_olimpicos: 1,
+  color_cinturon: "Negro",
+  nombre_gimnasio: "Gimnasio de los ingenieros"
+}
+```
+
+### **El decimo documento**
+```
+{
+  nombre_completo: {
+    nombre: "Lucia",
+    apellidos: "Abellan Chirnechero"
+  },
+  fecha_nacimiento: {
+    dia: 16,
+    mes: 9,
+    año: 2001
+  },
+  direccion: {
+    calle: "Calle San Antonio",
+    localidad: "Jaén",
+    provincia: "Jaén",
+    pais: "España"
+  },
+  años_participacion_juegos_olimpicos: [2020],
+  numero_particiapciones_Juegos_olimpicos: 1,
+  color_cinturon: "Verde",
+  nombre_gimnasio: "Gimnasio de los psicologos"
+}
+```
