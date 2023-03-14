@@ -437,5 +437,20 @@ El código en ese repositorio muestra una aplicación similar, pero con mucha m�
 
 Además, incluye documentación sobre dicho código y un vídeo descriptivo de cómo se ha realizado y cómo funciona la aplicación de ejemplo.
 
-## Resolución de la práctica
+# Resolución de la práctica
+
 **Enlace al tablero Trello:** https://trello.com/b/uZPYPrJI/practica3
+
+## Capturas de pantalla
+
+![Captura de pantalla del Home de Fauna](./assets/img/Home_Fauna.png)
+*Captura de pantalla del Home de Fauna* &#8593;
+
+
+![Captura de pantalla de la página en la que aparece la base de datos](./assets/img/BBDD.png)
+*Captura de pantalla de la página en la que aparece la base de datos* &#8593;
+
+
+![Captura de pantalla de la página en la que aparece la colección](./assets/img/Coleccion.png)
+*Captura de pantalla de la página en la que aparece la colección* &#8593;
+
