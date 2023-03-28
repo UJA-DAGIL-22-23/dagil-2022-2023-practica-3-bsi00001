@@ -5,5 +5,57 @@
  * @date 03-Feb-2023
  */
 
+ table.listado_jugadores {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 100, 0.8);
+}
+
+table.listado_jugadores thead th {
+    margin: 3px;
+    height: 2.5em;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+
+}
+
+table.listado_jugadores tbody td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+table.listado_jugadores tbody tr {
+    margin: 3px;
+    height: 2em;
+    background-color: rgba(0, 0, 100, 0.1)
+}
+
+
+.form-jugador-elemento:disabled {
+    color: black;
+    background-color: inherit;
+    border-width: 0px;
+    text-align: center;
+}
+
+.form-jugador-elemento:enabled {
+    color:rgba(0, 0, 100, 0.8);
+}
+
+.form-jugador-elemento:enabled:required {
+    color:rgba(100, 0, 0, 0.8);
+}
+
+table.listado_jugadores thead,
+table.listado_jugadores tbody,
+table.listado_jugadores tr,
+table.listado_jugadores td {
+    text-align: center;
+    margin: 0 auto 0 auto;
+}
+
+table.listado_jugadores {
+    width: 100%;
+}
+
  
 

@@ -14,10 +14,10 @@ const faunadb = require('faunadb'),
     q = faunadb.query;
 
 const client = new faunadb.Client({
-    secret: '¿¿¿ CLAVE SECRETA EN FAUNA PARA ESTA BBDD???',
+    secret: 'fnAE-2-9LLAAzENUWZj3ASyFO013DjzUpBC5lq2T',
 });
 
-const COLLECTION = "¿¿¿ COLECCION ???"
+const COLLECTION = "Datos_Kung_Fu"
 
 // CALLBACKS DEL MODELO
 
@@ -61,6 +61,29 @@ const CB_MODEL_SELECTS = {
         }
     },
 
+    /**
+     * Método para obtener todos los jugadores de la BBDD
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
+     */
+    getTodos: async (req, res) => {
+        try {
+            let jugadores = await client.query (
+                q.Map (
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+
+            CORS(res)
+                .status(200)
+                .json(jugadores)({
+                
+            })
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
+        }
+    },
 }
 
 

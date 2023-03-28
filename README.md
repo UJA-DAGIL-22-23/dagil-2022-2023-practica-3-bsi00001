@@ -438,10 +438,14 @@ El código en ese repositorio muestra una aplicación similar, pero con mucha m�
 Además, incluye documentación sobre dicho código y un vídeo descriptivo de cómo se ha realizado y cómo funciona la aplicación de ejemplo.
 
 # Resolución de la práctica
+**Datos personales del alumno:**
+* **Nombre:** Bader Irheem
+* **Correo electronico:** bsi00001@red.ujaen.es
 
 **Enlace al tablero Trello:** https://trello.com/b/uZPYPrJI/practica3
 
 ## Capturas de pantalla
+Contenido del tablero Trello y la base de datos de Fauna antes de empezar los incrementos
 
 ![Captura de pantalla del Home de Fauna](./assets/img/Home_Fauna.png)
 *Captura de pantalla del Home de Fauna* &#8593;
@@ -705,3 +709,5 @@ Además, incluye documentación sobre dicho código y un vídeo descriptivo de c
   nombre_gimnasio: "Gimnasio de los psicologos"
 }
 ```
+
+## Primer incremento
