@@ -12,6 +12,7 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
+const TITULO_IMPRIME_TODOS_JUGADORES = "Plantilla del listados de los nombres de todos los jugadores"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -123,6 +124,14 @@ describe("Plantilla.mostrarAcercaDe: ", function () {
         })
 })
 
+describe("Plantilla.imprimeTodosJugadores: ", function() {
+    it("Mostrar datos nulos cuando le pasamos vector nulo", 
+        function () {
+            // Objeto vacio
+            Plantilla.imprimeTodosJugadores([])
+            expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_TODOS_JUGADORES)
+        })
+})
 
 /*
 IMPORTANTE

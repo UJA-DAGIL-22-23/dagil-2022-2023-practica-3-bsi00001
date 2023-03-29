@@ -24,14 +24,7 @@ Plantilla.plantillaTags = {
     "NOMBRE": "### NOMBRE ###",
     "APELLIDOS": "### APELLIDS ###",
     "FECHA_NACIMIENTO": "### FECHA DE NACIMIENTO ###",
-    "DIA": "### DIA ###",
-    "MES": "### MES ###",
-    "AÑO": "### AÑO ###",
     "DIRECCION": "### DIRECCION ###",
-    "CALLE": "### CALLE ###",
-    "LOCALIDAD": "### LOCALIDAD ###",
-    "PROVINCIA": "### PROVINCIA ###",
-    "PAIS": "### PAIS ###",
     "NUMERO_PARTICIPACIONES": "### NUMERO PARTICIPACIONES ###",
     "AÑOS PARTICIPACION": "### AÑOS PARTICIPACION ###",
     "COLOR_CINTURON": "### COLOR_CINTURON ###",
@@ -217,7 +210,7 @@ Plantilla.imprimeTodosJugadores = function (vector) {
     msj += Plantilla.plantillaTablaJugadores.pie
 
     // Borrar toda la información de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Listados de nombres de jugadores" , msj)                   //LO TENGO DISTINTO
+    Frontend.Article.actualizar("Plantilla del listados de los nombres de todos los jugadores" , msj)                   //LO TENGO DISTINTO
 }
 
 
