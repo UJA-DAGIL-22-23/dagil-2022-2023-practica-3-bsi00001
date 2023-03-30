@@ -18,6 +18,18 @@ Plantilla.datosDescargadosNulos = {
     fecha: ""
 }
 
+// Plantilla de datosJugadores vacíos
+Plantilla.datosJugadoresNulos = {
+    nombre: "undefined",
+    apellidos: "undefined",
+    fecha_nacimiento: "undefined",
+    direccion: "undefined",
+    numero_particiapciones_Juegos_olimpicos: "undefined",
+    años_participacion_juegos_olimpicos: "undefined",
+    color_cinturon: "undefined",
+    nombre_gimnasio: "undefined"
+}
+
 Plantilla.plantillaTags = {
     "ID": "### ID ###",
     "NOMBRE_COMPLETO": "### NOMBRE_COMPLETO ###",
@@ -120,8 +132,7 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
         <th width="5%">Color cinturón</th>
         <th width="15%">Nombre del gimnasio</th>
     </thead>
-    <tbody>
-`;
+    <tbody>`;
 
 //Elementos RT que muestra los datos de un jugador
 Plantilla.plantillaTablaJugadores.cuerpo = `
@@ -139,7 +150,7 @@ Plantilla.plantillaTablaJugadores.cuerpo = `
 `;
 
 //pie de la tabla 
-Plantilla.plantillaTablaJugadores.pie = `        </tbody>
+Plantilla.plantillaTablaJugadores.pie = `</tbody>
 </table>
 `;
 
@@ -202,11 +213,16 @@ Plantilla.recupera = async function (callBackFn) {
  * @param {vector_de_jugadores} vector 
  */
 Plantilla.imprimeTodosJugadores = function (vector) {
-    //console.log(vector) // Para comprobar lo que hay en vector
+    
+    vector = vector || this.datosJugadoresNulos
+
+    if (typeof vector !== "object") vector = this.datosJugadoresNulos
 
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaTablaJugadores.cabecera
-    vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualiza(e))
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualiza(e));
+    }
     msj += Plantilla.plantillaTablaJugadores.pie
 
     // Borrar toda la información de Article y la sustituyo por la que me interesa

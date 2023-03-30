@@ -13,6 +13,7 @@ const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
 const TITULO_IMPRIME_TODOS_JUGADORES = "Plantilla del listados de los nombres de todos los jugadores"
+const OBJETO_VACIO = '';
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -130,7 +131,9 @@ describe("Plantilla.imprimeTodosJugadores: ", function() {
             // Objeto vacio
             Plantilla.imprimeTodosJugadores([])
             expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_TODOS_JUGADORES)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
         })
+    
 })
 
 /*
