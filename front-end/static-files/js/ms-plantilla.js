@@ -157,6 +157,15 @@ Plantilla.plantillaTablaJugadores.cuerpo = `
 </tr>
 `;
 
+//Elementos RT que muestra los datos de un jugador
+Plantilla.plantillaTablaJugadores.cuerpoNombres = `
+<tr title="${Plantilla.plantillaTags.ID}">
+    <td>${Plantilla.plantillaTags.ID}</td>
+    <td>${Plantilla.plantillaTags.NOMBRE}</td>
+    <td>${Plantilla.plantillaTags.APELLIDOS}</td>
+</tr>
+`;
+
 //pie de la tabla 
 Plantilla.plantillaTablaJugadores.pie = `</tbody>
 </table>
@@ -188,6 +197,15 @@ Plantilla.sustituyeTags = function (plantilla, jugador) {
  */
 Plantilla.plantillaTablaJugadores.actualiza = function (jugador) {
     return Plantilla.sustituyeTags(this.cuerpo, jugador)
+}
+
+/**
+ * Actualiza el cuerpo de la tabla con los datos de el jugadores que se le pasa
+ * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla des cuerpo de la tabla con los datos actualizados
+ */
+Plantilla.plantillaTablaJugadores.actualizaNombres = function (jugador) {
+    return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
 }
 
 /**
@@ -270,3 +288,9 @@ Plantilla.listarJugadores = function () {
     Plantilla.recupera(Plantilla.imprimeTodosJugadores);
 }
 
+/**
+ * Función principal para recuperar solo los nombres de los jugadores desde el MS, y posteriormente imprimirlos
+ */
+Plantilla.listarNombresJugadores = function () {
+    Plantilla.recupera(Plantilla.imprimeSoloNombres);
+}
