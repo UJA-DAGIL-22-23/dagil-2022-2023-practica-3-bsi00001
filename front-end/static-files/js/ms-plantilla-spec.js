@@ -132,8 +132,13 @@ describe("Plantilla.imprimeTodosJugadores: ", function() {
             Plantilla.imprimeTodosJugadores([])
             expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_TODOS_JUGADORES)
             expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
-        })
-    
+    })
+
+    it("Mostrar datos nulos cuando le pasamos un valor que no es un objeto",
+        function() {
+            Plantilla.imprimeTodosJugadores(10)
+            expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_TODOS_JUGADORES)
+    })
 })
 
 /*
