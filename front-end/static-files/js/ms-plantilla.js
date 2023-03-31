@@ -70,7 +70,6 @@ Plantilla.descargarRuta = async function (ruta, callBackFn) {
     }
 }
 
-
 /**
  * Función principal para mostrar los datos enviados por la ruta "home" de MS Plantilla
  */
@@ -134,6 +133,15 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
     </thead>
     <tbody>`;
 
+// Cabecera de la tabla para solo los nombres
+Plantilla.plantillaTablaJugadores.cabeceraNombres = `<table width="100%" class="listado_jugadores">
+<thead>
+    <th width="5%">ID</th>
+    <th width="15%">Nombre</th>
+    <th width="10%">Apellidos</th>
+</thead>
+<tbody>`;
+
 //Elementos RT que muestra los datos de un jugador
 Plantilla.plantillaTablaJugadores.cuerpo = `
 <tr title="${Plantilla.plantillaTags.ID}">
@@ -174,7 +182,7 @@ Plantilla.sustituyeTags = function (plantilla, jugador) {
 }
         
 /**
- * Actualiza el cuerpo de la tabla con los daos de la persona que se le pasa
+ * Actualiza el cuerpo de la tabla con los datos de el jugadores que se le pasa
  * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
  * @returns La plantilla des cuerpo de la tabla con los datos actualizados
  */
@@ -226,9 +234,20 @@ Plantilla.imprimeTodosJugadores = function (vector) {
     msj += Plantilla.plantillaTablaJugadores.pie
 
     // Borrar toda la información de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Plantilla del listados de los nombres de todos los jugadores" , msj)                   //LO TENGO DISTINTO
+    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)                   //LO TENGO DISTINTO
 }
 
+Plantilla.imprimeSoloNombres = function (vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualizaNombres(e));
+    }
+    msj += Plantilla.plantillaTablaJugadores.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
+}
 
 /**
  * Función principal para responder al evento de elegir la opción "Home"
@@ -245,7 +264,7 @@ Plantilla.procesarAcercaDe = function () {
 }
 
 /**
- * Función principal para recuperar las personas desde el MS, y posteriormente imprimirlas
+ * Función principal para recuperar los jugadores desde el MS, y posteriormente imprimirlos
  */
 Plantilla.listarJugadores = function () {
     Plantilla.recupera(Plantilla.imprimeTodosJugadores);
