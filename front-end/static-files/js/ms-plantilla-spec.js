@@ -155,6 +155,7 @@ describe("Plantilla.imprimeSoloNombres: ", function() {
         function() {
             Plantilla.imprimeSoloNombres(10)
             expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_JUGADORES)
+            expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
     })
 })
 
