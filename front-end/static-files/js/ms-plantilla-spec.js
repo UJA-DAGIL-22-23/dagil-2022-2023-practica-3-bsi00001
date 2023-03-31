@@ -10,7 +10,6 @@
 // Constantes para usar en las pruebas
 const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO)
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
-const elementoTabla = document.getElementById(Frontend.CLASS_OCULTAR)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
 const TITULO_IMPRIME_TODOS_JUGADORES = "Plantilla del listados de los datos de todos los jugadores"
@@ -150,6 +149,12 @@ describe("Plantilla.imprimeSoloNombres: ", function() {
             Plantilla.imprimeSoloNombres([])
             expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_JUGADORES)
             expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+    })
+
+    it("Mostrar datos nulos cuando le pasamos un valor que no es un objeto",
+        function() {
+            Plantilla.imprimeSoloNombres(10)
+            expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_JUGADORES)
     })
 })
 
