@@ -10,6 +10,8 @@
 /// Creo el espacio de nombres
 let Plantilla = {};
 
+Plantilla.jugadorMostrado = null
+
 // Plantilla de datosDescargados vacíos
 Plantilla.datosDescargadosNulos = {
     mensaje: "Datos Descargados No válidos",
@@ -121,15 +123,15 @@ Plantilla.plantillaTablaJugadores = {}
 // Cabecera de la tabla
 Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado_jugadores">
     <thead>
-        <th width="5%">ID</th>
-        <th width="15%">Nombre</th>
-        <th width="10%">Apellidos</th>
-        <th width="25%">Fecha de nacimiento</th>
-        <th width="10%">Dirección</th>
-        <th width="10%">Número participaciones</th>
-        <th width="5%">Años participación</th>
-        <th width="5%">Color cinturón</th>
-        <th width="15%">Nombre del gimnasio</th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Fecha de nacimiento</th>
+        <th>Dirección</th>
+        <th>Número participaciones</th>
+        <th>Años participación</th>
+        <th>Color cinturón</th>
+        <th>Nombre del gimnasio</th>
     </thead>
     <tbody>`;
 
@@ -234,7 +236,27 @@ Plantilla.recupera = async function (callBackFn) {
 }
 
 /**
- * Función para mostrar en jugador todos los nombres de los jugadores
+ * Función que recupera todos los jugadores llamando al MS Plantilla
+ * Posteriormente, llama a la función callBackFn para trabajar con los datos recuperados.
+ * @param {String} idJugador Identificador del jugador a mostrar
+ * @param {funcion} callBackFn Función a la que se llamará una vez recibidos los datos
+ */
+Plantilla.recuperaUnJugador = async function (idJugador, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getPorId/" + idJugador
+        const response = await fetch(url); //                                       LANZA UNA EXCEPCION !!!!!!!!!!!!!!!!!!
+        if (response) {
+            const jugador = await response.json()
+            callBackFn(jugador)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+}
+
+/**
+ * Función para mostrar los datos de todos los jugadores
  * que se han recuperado de la BBDD
  * @param {vector_de_jugadores} vector 
  */
@@ -252,9 +274,14 @@ Plantilla.imprimeTodosJugadores = function (vector) {
     msj += Plantilla.plantillaTablaJugadores.pie
 
     // Borrar toda la información de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)                   //LO TENGO DISTINTO
+    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)
 }
 
+/**
+ * Función para mostrar solo los nombre de todos los jugadores
+ * que se recuperan de la BBDD
+ * @param {vector_de_jugadores} vector 
+ */
 Plantilla.imprimeSoloNombres = function (vector) {
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
