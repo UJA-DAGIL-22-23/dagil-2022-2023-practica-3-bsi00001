@@ -710,4 +710,185 @@ Contenido del tablero Trello y la base de datos de Fauna antes de empezar los in
 }
 ```
 
-## Primer incremento
+
+
+
+
+## **Primer incremento**
+El primer incremento está formado por tres Historias de Usuario, 1, 2 y 4 (según el guión de práctica).
+
+![Captura de pantalla del inicio del primer incremento](./assets/img/inicio_incremento_1.png)
+*Captura de pantalla del inicio del primer incremento en el tablero de Trello* &#8593;
+
+![Captura de pantalla del final del primer incremento](./assets/img/fin_incremento_1.png)
+*Captura de pantalla del final del primer incremento en el tablero de Trello* &#8593;
+
+
+
+
+
+### ***La historia de usuario 1***
+
+![Captura de pantalla del inicio del primer incremento](./assets/img/inicio_HU_1.png)
+*Captura de pantalla del inicio de la primera historia de usuario en el tablero de Trello* &#8593;
+
+Esta historia de usuario consiste en mostrar **la información del autor** cuando se pulsa el botón ```Acerca de```
+Como usuario normal quiero mostrar la información del autor de la aplicación al pulsar el botón *Acerca de* para consultar los datos del autor.
+
+Se ha modificado el código en ```callback.js``` de la función ```acercaDe```. Se ha cambiado el contenido de los campos ```autor, email y fecha```:
+```
+autor: "Bader Irheem",
+email: "bsi00001@red.ujaen.es",
+fecha: "17/8/2000"
+```
+
+Las diferentes pruebas TDD sobre las funciones utilizadas para esta HU son los siguientes:
+- muestra datos nulos cuando le pasamos un valor nulo
+- muestra datos nulos cuando le pasamos un valor que no es un objeto
+- muestra datos nulos cuando le pasamos un objeto que no tiene campo mensaje o autor o email o fecha
+- muestra correctamente el título y el mensaje conteniendo el autor, el email y la fecha
+
+Tras la modificación de la función anterior, los datos mostrados cuando se pulsa el botón Acerca de son los siguientes:
+
+![Captura de pantalla del fin de la HU1](./assets/img/fin_HU_1.png)
+*Captura de pantalla del fin de la HU1* &#8593;
+
+
+
+
+
+### ***La historia de usuario 2***
+
+![Captura de pantalla del inicio de la HU2](./assets/img/inicio_HU_2.png)
+*Captura de pantalla del inicio de la HU2* &#8593;
+
+Esta historia de usuario consiste en **listar solo los nombres de todos los jugadores**.
+Como usuario normal quiero al pulsar un botón listar solo los nombres de todos los jugadores para consultar los nombres de los jugadores existentes.
+
+Se han añadido las siguientes funciones en la clase Plantilla:
+- ```Plantilla.listarNombresJugadores```
+- ```Plantilla.recupera```
+- ```Plantilla.imprimeSoloNombres```
+
+**```Plantilla.listarNombresJugadores```**
+```
+Plantilla.listarNombresJugadores = function () {
+    Plantilla.recupera(Plantilla.imprimeSoloNombres);
+}
+```
+
+**```Plantilla.recupera```**
+```
+Plantilla.recupera = async function (callBackFn) {
+    let response = null
+
+    // Intento conectar el microservicio Plantilla
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
+        response = await fetch(url)
+
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+
+    //mostrar todos los jugadores que se han descargado
+    let vectorJugadores = null
+    if (response) {
+        vectorJugadores = await response.json()
+        callBackFn(vectorJugadores.data)
+    }
+}
+```
+
+**```Plantilla.imprimeSoloNombres```**
+```
+Plantilla.imprimeSoloNombres = function (vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualizaNombres(e));
+    }
+    msj += Plantilla.plantillaTablaJugadores.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
+}
+```
+
+Para cada una de las funciones anteriores se han hecho las correspondientes pruebas TDD en la clase ```ms-plantilla-spec.js```.
+
+Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:
+
+```Plantilla.recupera```
+- debe llamar a la función callback con los datos descargados
+- debe llamar a la API del gateway con la URL correcta
+
+```Plantilla.imprimeSoloNombres```
+- Mostrar datos nulos cuando le pasamos vector nulo
+- Mostrar datos nulos cuando le pasamos un valor que no es un objeto
+
+Tras pulsar el botón ```Mostrar solo nombres de los jugadores```, se listarán los nombres de todos los jugadores en la BBDD.
+
+![Captura de pantalla del inicio de la HU2](./assets/img/fin_HU_2.png)
+*Captura de pantalla del fin de la HU2* &#8593;
+
+
+
+
+
+### ***La historia de usuario 4***
+
+![Captura de pantalla del inicio de la HU4](./assets/img/inicio_HU_4.png)
+*Captura de pantalla del inicio de la HU4* &#8593;
+
+Esta historia de usuario consiste en **listar todos los datos de todos los jugadores**.
+Como usuario normal quiero al pulsar un botón listar todos los datos de todos los jugadores para consultar los jugadores existentes.
+
+Se han añadido las siguientes funciones en la clase Plantilla:
+- ```Plantilla.listarJugadores```
+- ```Plantilla.imprimeTodosJugadores```
+
+**```Plantilla.listarJugadores```**
+```
+Plantilla.listarJugadores = function () {
+    Plantilla.recupera(Plantilla.imprimeTodosJugadores);
+}
+```
+
+**```Plantilla.imprimeTodosJugadores```**
+```
+Plantilla.imprimeTodosJugadores = function (vector) {
+    
+    vector = vector || this.datosJugadoresNulos
+
+    if (typeof vector !== "object") vector = this.datosJugadoresNulos
+
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaJugadores.cabecera
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualiza(e));
+    }
+    msj += Plantilla.plantillaTablaJugadores.pie
+
+    // Borrar toda la información de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)
+}
+```
+
+Para cada una de las funciones anteriores se han hecho las correspondientes pruebas TDD en la clase ```ms-plantilla-spec.js```.
+
+Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:
+
+```Plantilla.recupera```
+- debe llamar a la función callback con los datos descargados
+- debe llamar a la API del gateway con la URL correcta
+
+```Plantilla.imprimeTodosJugadores```
+- Mostrar datos nulos cuando le pasamos vector nulo
+- Mostrar datos nulos cuando le pasamos un valor que no es un objeto
+
+Tras pulsar el botón ```Mostrar todos los jugadores```, se listarán todos los datos de todos los jugadores en la BBDD.
+
+![Captura de pantalla del inicio de la HU4](./assets/img/fin_HU_4.png)
+*Captura de pantalla del fin de la HU4* &#8593;
