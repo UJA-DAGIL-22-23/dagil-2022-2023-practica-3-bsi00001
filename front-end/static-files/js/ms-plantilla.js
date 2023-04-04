@@ -45,6 +45,58 @@ Plantilla.plantillaTags = {
     "NOMBRE_GIMNASIO": "### NOMBRE DEL GIMNASIO ###"
 }
 
+Plantilla.jugadorComoTabla = function (jugador) {
+    return Plantilla.plantillaTablaJugadores.cabecera
+        + Plantilla.plantillaTablaJugadores.actualiza(jugador)
+        + Plantilla.plantillaTablaJugadores.pie;
+}
+
+Plantilla.plantillaFormularioJugador = {}
+
+Plantilla.plantillaFormularioJugador.formulario = `<form method='post' action=''>
+<table width="100%" class="listado_jugadores">
+    <thead>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Fecha de nacimiento</th>
+        <th>Dirección</th>
+        <th>Número participaciones</th>
+        <th>Años participación</th>
+        <th>Color cinturón</th>
+        <th>Nombre del gimnasio</th>
+        <th>Acción</th>
+    </thead>
+    <tbody>
+        <tr title="${Plantilla.plantillaTags.ID}">
+            <td><input type="text" class="form-persona-elemento disabled" id="form-persona-id" value="${Plantilla.plantillaTags.ID}" name="id_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-nombre" required value="${Plantilla.plantillaTags.NOMBRE}" name="nombre_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-apellidos" required value="${Plantilla.plantillaTags.APELLIDOS}" name="apellidos_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-fecha-nacimiento" required value="${Plantilla.plantillaTags["FECHA_NACIMIENTO"]}" name="fecha_nacimiento_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-direccion" required value="${Plantilla.plantillaTags.DIRECCION}" name="direccion_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-numero-participaciones" required value="${Plantilla.plantillaTags.NUMERO_PARTICIPACIONES}" name="numero_participaciones_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-anios-participacion" required value="${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}" name="anios_participacion_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-color-cinturon" required value="${Plantilla.plantillaTags.COLOR_CINTURON}" name="color_cinturon_jugador"/></td>
+            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-nombre-gimnasio" required value="${Plantilla.plantillaTags.NOMBRE_GIMNASIO}" name="nombre_gimnasio_jugador"/></td>
+        </tr>
+    </tbody>
+</table>
+</form>`;
+/*
+<td>
+                <div><a href="javascript:Personas.editar()" class="opcion-secundaria mostrar">Editar</a></div>
+                <div><a href="javascript:Personas.guardar()" class="opcion-terciaria editar ocultar">Guardar</a></div>
+                <div><a href="javascript:Personas.cancelar()" class="opcion-terciaria editar ocultar">Cancelar</a></div>
+            </td>
+*/
+Plantilla.plantillaFormularioJugador.actualiza = function (jugador) {
+    return Plantilla.sustituyeTags(this.formulario, jugador);
+}
+
+Plantilla.jugadorComoFormulario = function (jugador) {
+    return Plantilla.plantillaFormularioJugador.actualiza(jugador);
+}
+
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
  * @param {string} ruta Ruta a descargar
@@ -132,6 +184,7 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
         <th>Años participación</th>
         <th>Color cinturón</th>
         <th>Nombre del gimnasio</th>
+        <th>Acción</th>
     </thead>
     <tbody>`;
 
@@ -156,6 +209,9 @@ Plantilla.plantillaTablaJugadores.cuerpo = `
     <td>${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}</td>
     <td>${Plantilla.plantillaTags.COLOR_CINTURON}</td>
     <td>${Plantilla.plantillaTags.NOMBRE_GIMNASIO}</td>
+    <td>
+        <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div>
+    </td>
 </tr>
 `;
 
@@ -294,6 +350,21 @@ Plantilla.imprimeSoloNombres = function (vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
 }
 
+Plantilla.almacenaDatos = function (jugador) {
+    Plantilla.jugadorMostrado = jugador;
+}
+
+Plantilla.imprimeUnJugador = function (jugador) {
+    //let msj = Plantilla.jugadorComoTabla(jugador);
+    
+    let msj = Plantilla.jugadorComoFormulario(jugador);
+    //Borrar toda la información de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizarBoton("Mostrar los datos del jugador", msj)
+
+    //Actualiza el objeto que guarda los datos mostrados
+    Plantilla.almacenaDatos(jugador)
+}
+
 /**
  * Función principal para responder al evento de elegir la opción "Home"
  */
@@ -320,4 +391,8 @@ Plantilla.listarJugadores = function () {
  */
 Plantilla.listarNombresJugadores = function () {
     Plantilla.recupera(Plantilla.imprimeSoloNombres);
+}
+
+Plantilla.mostrar = function (idJugador) {
+    this.recuperaUnJugador(idJugador, this.imprimeUnJugador);
 }
