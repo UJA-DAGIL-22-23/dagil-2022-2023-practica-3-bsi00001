@@ -76,18 +76,27 @@ Frontend.Article.aniadirContenido = function (texto) {
 Frontend.quitarClase = function (elemento, nombreClase) {
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
+    /* Víctor: 04-Abr-2023
+     Se produce un error cuando la variable clase es NULL, que al final, deriva en un lanzamiento 
+     de excepción al realizar un FETCH de una URL. Lo soluciono comprobando el valor de clase
+    */
+    clase = (clase) ? clase : ""
     clase = clase.split("   ")
         .filter(e => e)
         .filter(e => e != nombreClase)
         .join(" ")
     elemento.setAttribute("class", clase)
-
     return this;
 }
 
 Frontend.aniadirClase = function (elemento, nombreClase) {
     elemento = (typeof elemento === "string") ? document.getElementById(elemento) : elemento;
     let clase = elemento.getAttribute("class")
+    /* Víctor: 04-Abr-2023
+     Se produce un error cuando la variable clase es NULL, que al final, deriva en un lanzamiento 
+     de excepción al realizar un FETCH de una URL. Lo soluciono comprobando el valor de clase
+    */
+    clase = (clase) ? clase : ""
     clase = clase.split("   ")
         .filter(e => e)
         .filter(e => e != nombreClase)
@@ -101,7 +110,7 @@ Frontend.aniadirClase = function (elemento, nombreClase) {
 Frontend.Article.mostrar = function () {
     let article = document.getElementById(Frontend.ID_SECCION_PRINCIPAL);
     Frontend.quitarClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_OCULTAR)
-            .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
+        .aniadirClase(Frontend.ID_SECCION_PRINCIPAL, Frontend.CLASS_MOSTRAR)
 }
 
 /**
@@ -115,8 +124,8 @@ Frontend.Article.actualizar = function (titulo, contenido) {
     titulo = titulo || ""
     contenido = contenido || ""
     // Sustituyo el título y el contenido del articulo
-    document.getElementById( Frontend.ID_SECCION_PRINCIPAL_TITULO ).innerHTML = titulo
-    document.getElementById( Frontend.ID_SECCION_PRINCIPAL_CONTENIDO ).innerHTML = contenido
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML = titulo
+    document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML = contenido
     return this;
 }
 
@@ -127,8 +136,8 @@ Frontend.Article.actualizar = function (titulo, contenido) {
  * @returns El propio Article para concatenar llamadas
  */
 Frontend.Article.actualizarBoton = function (titulo, contenido) {
-    this.borrar() 
-        .aniadirTitulo(titulo) 
+    this.borrar()
+        .aniadirTitulo(titulo)
         .aniadirContenido(contenido)
         .mostrar()
     return this;
