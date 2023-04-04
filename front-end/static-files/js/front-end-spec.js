@@ -55,9 +55,41 @@ describe("Frontend.Article.actualizar: ", function () {
     it("Debe devolver el propio objeto",
         function () {
             // Probamos diversas llamadas con distintos parámetros
-            expect(Frontend.Article.actualizar()).toBe(Frontend.Article) 
+            expect(Frontend.Article.actualizar()).toBe(Frontend.Article)
             expect(Frontend.Article.actualizar(tituloPrueba)).toBe(Frontend.Article)
             expect(Frontend.Article.actualizar(tituloPrueba, contenidoPrueba)).toBe(Frontend.Article)
+        })
+
+})
+
+
+// Víctor: 4-abr-2023. TDD Para quitarClase y aniadirClase
+describe("Frontend.quitarClase: ", function () {
+    it("no da error con un elemento que NO tiene ninguna clase",
+        function () {
+            const elemento = document.getElementById("seccion-principal")
+            const nombreClase = "clase-patata"
+            expect(Frontend.quitarClase(elemento, nombreClase)).toBe(Frontend)
+            expect(elemento.getAttribute("class")).toBe("")
+        })
+    it("no da error con un elemento que tiene alguna clase, pero no la que queremos quitar",
+        function () {
+            const elemento = document.getElementsByTagName( "a" )[0] // primer enlace de NAV
+            const nombreClase = "clase-patata"
+            const claseAnterior = elemento.getAttribute("class")
+            expect(Frontend.quitarClase(elemento, nombreClase)).toBe(Frontend)
+            expect(elemento.getAttribute("class")).toBe(claseAnterior)
+        })
+    it("no da error con un elemento que tiene la clase que queremos quitar",
+        function () {
+            const elemento = document.getElementsByTagName( "a" )[0] // primer enlace de NAV
+            const nombreClase = "opcion-principal"
+            const claseAnterior = elemento.getAttribute("class")
+            expect(Frontend.quitarClase(elemento, nombreClase)).toBe(Frontend)
+            expect(elemento.getAttribute("class")).not.toBe(claseAnterior)
+
+            // Devolvemos el elemento a su estado original:
+            Frontend.aniadirClase( elemento, nombreClase)
         })
 
 })
