@@ -225,13 +225,12 @@ Plantilla.plantillaTablaJugadores.cuerpo = `
     <td>${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}</td>
     <td>${Plantilla.plantillaTags.COLOR_CINTURON}</td>
     <td>${Plantilla.plantillaTags.NOMBRE_GIMNASIO}</td>
-</tr>
-`;
-/*
-<td>
+    <td>
         <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div>
     </td>
-*/
+</tr>
+`;
+
 //Elementos RT que muestra los datos de un jugador
 Plantilla.plantillaTablaJugadores.cuerpoEspecifico = `
 <tr title="${Plantilla.plantillaTags.ID}">
