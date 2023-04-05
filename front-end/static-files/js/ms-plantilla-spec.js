@@ -14,6 +14,7 @@ const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
 const TITULO_IMPRIME_TODOS_JUGADORES = "Plantilla del listados de los datos de todos los jugadores"
 const TITULO_IMPRIME_NOMBRES_JUGADORES = "Plantilla del listado de los nombres de todos los jugadores"
+const TITULO_IMPRIME_DATOS_JUGADOR = "Mostrar los datos del jugador"
 const OBJETO_VACIO = '';
 
 const datosDescargadosPrueba = {
@@ -190,6 +191,15 @@ describe("Plantilla.imprimeSoloNombres: ", function() {
             Plantilla.imprimeSoloNombres(10)
             expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_JUGADORES)
             expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+    })
+})
+
+describe("Plantilla.imprimeUnJugador: " , function() {
+    it("Mostrar datos nulos cuando le pasamos un valor nulo", 
+    function() {
+        let jugador = null;
+        Plantilla.imprimeUnJugador(jugador);
+        expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_DATOS_JUGADOR);
     })
 })
 

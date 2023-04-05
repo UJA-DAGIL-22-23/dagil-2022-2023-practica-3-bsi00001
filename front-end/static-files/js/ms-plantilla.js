@@ -22,6 +22,7 @@ Plantilla.datosDescargadosNulos = {
 
 // Plantilla de datosJugadores vacíos
 Plantilla.datosJugadoresNulos = {
+    id: "undefined",
     nombre: "undefined",
     apellidos: "undefined",
     fecha_nacimiento: "undefined",
@@ -46,8 +47,8 @@ Plantilla.plantillaTags = {
 }
 
 Plantilla.jugadorComoTabla = function (jugador) {
-    return Plantilla.plantillaTablaJugadores.cabecera
-        + Plantilla.plantillaTablaJugadores.actualiza(jugador)
+    return Plantilla.plantillaTablaJugadores.cabeceraEspecifico
+        + Plantilla.plantillaTablaJugadores.actualizaEspecifico(jugador)
         + Plantilla.plantillaTablaJugadores.pie;
 }
 
@@ -188,6 +189,21 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
     </thead>
     <tbody>`;
 
+    // Cabecera de la tabla
+Plantilla.plantillaTablaJugadores.cabeceraEspecifico = `<table width="100%" class="listado_jugadores">
+<thead>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Apellidos</th>
+    <th>Fecha de nacimiento</th>
+    <th>Dirección</th>
+    <th>Número participaciones</th>
+    <th>Años participación</th>
+    <th>Color cinturón</th>
+    <th>Nombre del gimnasio</th>
+</thead>
+<tbody>`;
+
 // Cabecera de la tabla para solo los nombres
 Plantilla.plantillaTablaJugadores.cabeceraNombres = `<table width="100%" class="listado_jugadores">
 <thead>
@@ -209,9 +225,25 @@ Plantilla.plantillaTablaJugadores.cuerpo = `
     <td>${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}</td>
     <td>${Plantilla.plantillaTags.COLOR_CINTURON}</td>
     <td>${Plantilla.plantillaTags.NOMBRE_GIMNASIO}</td>
-    <td>
+</tr>
+`;
+/*
+<td>
         <div><a href="javascript:Plantilla.mostrar('${Plantilla.plantillaTags.ID}')" class="opcion-secundaria mostrar">Mostrar</a></div>
     </td>
+*/
+//Elementos RT que muestra los datos de un jugador
+Plantilla.plantillaTablaJugadores.cuerpoEspecifico = `
+<tr title="${Plantilla.plantillaTags.ID}">
+    <td>${Plantilla.plantillaTags.ID}</td>
+    <td>${Plantilla.plantillaTags.NOMBRE}</td>
+    <td>${Plantilla.plantillaTags.APELLIDOS}</td>
+    <td>${Plantilla.plantillaTags["FECHA_NACIMIENTO"]}</td>
+    <td>${Plantilla.plantillaTags.DIRECCION}</td>
+    <td>${Plantilla.plantillaTags.NUMERO_PARTICIPACIONES}</td>
+    <td>${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}</td>
+    <td>${Plantilla.plantillaTags.COLOR_CINTURON}</td>
+    <td>${Plantilla.plantillaTags.NOMBRE_GIMNASIO}</td>
 </tr>
 `;
 
@@ -262,6 +294,15 @@ Plantilla.plantillaTablaJugadores.actualiza = function (jugador) {
  * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
  * @returns La plantilla des cuerpo de la tabla con los datos actualizados
  */
+Plantilla.plantillaTablaJugadores.actualizaEspecifico = function (jugador) {
+    return Plantilla.sustituyeTags(this.cuerpoEspecifico, jugador)
+}
+
+/**
+ * Actualiza el cuerpo de la tabla con los datos de el jugadores que se le pasa
+ * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla des cuerpo de la tabla con los datos actualizados
+ */
 Plantilla.plantillaTablaJugadores.actualizaNombres = function (jugador) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
 }
@@ -300,7 +341,7 @@ Plantilla.recupera = async function (callBackFn) {
 Plantilla.recuperaUnJugador = async function (idJugador, callBackFn) {
     try {
         const url = Frontend.API_GATEWAY + "/plantilla/getPorId/" + idJugador
-        const response = await fetch(url); //                                       LANZA UNA EXCEPCION !!!!!!!!!!!!!!!!!!
+        const response = await fetch(url);
         if (response) {
             const jugador = await response.json()
             callBackFn(jugador)
@@ -354,15 +395,24 @@ Plantilla.almacenaDatos = function (jugador) {
     Plantilla.jugadorMostrado = jugador;
 }
 
+/**
+ * Una función que imprime los datos de un jugador especifico en una tabla
+ * @param {object} jugador El jugador buscado
+ */
 Plantilla.imprimeUnJugador = function (jugador) {
-    //let msj = Plantilla.jugadorComoTabla(jugador);
-    
-    let msj = Plantilla.jugadorComoFormulario(jugador);
-    //Borrar toda la información de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizarBoton("Mostrar los datos del jugador", msj)
+    if (!jugador || typeof jugador !== "object") {
+        elementoTitulo.innerHTML = "Mostrar los datos del jugador";
 
-    //Actualiza el objeto que guarda los datos mostrados
-    Plantilla.almacenaDatos(jugador)
+    } else {
+        let msj = Plantilla.jugadorComoTabla(jugador);
+
+        //let msj = Plantilla.jugadorComoFormulario(jugador);
+        //Borrar toda la información de Article y la sustituyo por la que me interesa
+        Frontend.Article.actualizarBoton("Mostrar los datos del jugador", msj)
+
+        //Actualiza el objeto que guarda los datos mostrados
+        Plantilla.almacenaDatos(jugador)
+    }
 }
 
 /**
@@ -393,6 +443,10 @@ Plantilla.listarNombresJugadores = function () {
     Plantilla.recupera(Plantilla.imprimeSoloNombres);
 }
 
+/**
+ * Una función que muestra los datos de un jugador especifico
+ * @param {string} idJugador id del jugador
+ */
 Plantilla.mostrar = function (idJugador) {
     this.recuperaUnJugador(idJugador, this.imprimeUnJugador);
 }
