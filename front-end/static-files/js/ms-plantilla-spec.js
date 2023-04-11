@@ -5,6 +5,7 @@
  * @date 03-feb-2023
  */
 
+
 // SPECS para Jasmine
 
 // Constantes para usar en las pruebas
@@ -202,6 +203,16 @@ describe("Plantilla.imprimeUnJugador: " , function() {
         expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_DATOS_JUGADOR);
     })
 })
+
+describe("Plantilla.recuperaJugadorBuscado", function() {
+  it("devuelve un vector vacío cuando no se encuentra el jugador buscado", async function() {
+    const callBackFn = function(resultado) {
+      expect(resultado).toEqual([]);
+    }
+    await Plantilla.recuperaJugadorBuscado("Jugador Inexistente", callBackFn);
+  });
+});
+
 
 /*
 IMPORTANTE

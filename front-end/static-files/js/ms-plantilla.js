@@ -351,6 +351,12 @@ Plantilla.recuperaUnJugador = async function (idJugador, callBackFn) {
     }
 }
 
+/**
+ * Función que recupera todos los jugadores llamando al MS Plantilla
+ * Posteriormente, llama a la función callBackFn para trabajar con los datos recperados.
+ * @param {string} nombreBuscado El nombre del jugador buscado
+ * @param {funcion} callBackFn Función a la que se llamará una vez recibidos los datos
+ */
 Plantilla.recuperaJugadorBuscado = async function (nombreBuscado, callBackFn) {
     try {
         const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
@@ -365,8 +371,6 @@ Plantilla.recuperaJugadorBuscado = async function (nombreBuscado, callBackFn) {
         alert("Error: No se han podido acceder al API Geteway")
         console.error(error)
     }
-
-    
 }
 
 /**
@@ -484,6 +488,10 @@ Plantilla.mostrar = function (idJugador) {
     this.recuperaUnJugador(idJugador, this.imprimeUnJugador);
 }
 
+/**
+ * Función que muestra el jugador con el nombre indicado
+ * @param {string} nombreBuscado El nombre del jugador buscado
+ */
 Plantilla.jugadorBuscado = function (nombreBuscado) {
     this.recuperaJugadorBuscado(nombreBuscado, this.imprimeTodosJugadores); 
 }
