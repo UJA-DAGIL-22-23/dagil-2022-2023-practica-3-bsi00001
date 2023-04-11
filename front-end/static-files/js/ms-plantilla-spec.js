@@ -213,6 +213,15 @@ describe("Plantilla.recuperaJugadorBuscado", function() {
   });
 });
 
+describe("Plantilla.recuperaJugadorBuscadoPorAspecto", function() {
+    it("devuelve un vector vacío cuando no se encuentra el jugador buscado", async function() {
+      const callBackFn = function(resultado) {
+        expect(resultado).toEqual([]);
+      }
+      await Plantilla.recuperaJugadorBuscadoPorAspecto("Jugador Inexistente", "Jugador Inexistente", "Jugador Inexistente", callBackFn);
+    });
+  });
+
 
 /*
 IMPORTANTE
