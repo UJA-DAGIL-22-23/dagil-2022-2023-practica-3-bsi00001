@@ -364,7 +364,7 @@ Plantilla.recuperaJugadorBuscado = async function (nombreBuscado, callBackFn) {
         let vectorJugadores = null
         if (response) {
             vectorJugadores = await response.json()
-            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === nombreBuscado)
+            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === nombreBuscado || jugador.data.nombre_completo.apellidos === nombreBuscado)
             callBackFn(filtro)
         }
     } catch (error) {

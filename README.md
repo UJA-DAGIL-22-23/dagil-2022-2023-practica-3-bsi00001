@@ -711,7 +711,7 @@ Contenido del tablero Trello y la base de datos de Fauna antes de empezar los in
 ```
 
 
-
+---
 
 
 ## **Primer incremento**
@@ -724,7 +724,7 @@ El primer incremento está formado por tres Historias de Usuario, 1, 2 y 4 (seg�
 *Captura de pantalla del final del primer incremento en el tablero de Trello* &#8593;
 
 
-
+---
 
 
 ### ***La historia de usuario 1***
@@ -754,7 +754,7 @@ Tras la modificación de la función anterior, los datos mostrados cuando se pul
 *Captura de pantalla del fin de la HU1* &#8593;
 
 
-
+---
 
 
 ### ***La historia de usuario 2***
@@ -765,60 +765,22 @@ Tras la modificación de la función anterior, los datos mostrados cuando se pul
 Esta historia de usuario consiste en **listar solo los nombres de todos los jugadores**.
 Como usuario normal quiero al pulsar un botón listar solo los nombres de todos los jugadores para consultar los nombres de los jugadores existentes.
 
-Se han añadido las siguientes funciones en la clase Plantilla:
+Se han añadido las siguientes funciones en la clase *ms-plantilla.js*:
 - ```Plantilla.listarNombresJugadores```
 - ```Plantilla.recupera```
 - ```Plantilla.imprimeSoloNombres```
 
-**```Plantilla.listarNombresJugadores```**
-```
-Plantilla.listarNombresJugadores = function () {
-    Plantilla.recupera(Plantilla.imprimeSoloNombres);
-}
-```
+Se han añadido las siguientes funciones en la clase *routes.js*:
+- `"/getTodos"`
+- `"/getPorId/:idJugador"`
 
-**```Plantilla.recupera```**
-```
-Plantilla.recupera = async function (callBackFn) {
-    let response = null
-
-    // Intento conectar el microservicio Plantilla
-    try {
-        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
-        response = await fetch(url)
-
-    } catch (error) {
-        alert("Error: No se han podido acceder al API Geteway")
-        console.error(error)
-    }
-
-    //mostrar todos los jugadores que se han descargado
-    let vectorJugadores = null
-    if (response) {
-        vectorJugadores = await response.json()
-        callBackFn(vectorJugadores.data)
-    }
-}
-```
-
-**```Plantilla.imprimeSoloNombres```**
-```
-Plantilla.imprimeSoloNombres = function (vector) {
-    // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
-    if (vector && Array.isArray(vector)) {
-        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualizaNombres(e));
-    }
-    msj += Plantilla.plantillaTablaJugadores.pie
-
-    // Borrar toda la información del Article y la sustituyo por la que ma interesa
-    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
-}
-```
+Se han añadido las siguientes funciones en la clase *callBacks.js*:
+- `getTodos`
+- `getPorId`
 
 Para cada una de las funciones anteriores se han hecho las correspondientes pruebas TDD en la clase ```ms-plantilla-spec.js```.
 
-Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:
+**Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:**
 
 ```Plantilla.recupera```
 - debe llamar a la función callback con los datos descargados
@@ -834,7 +796,7 @@ Tras pulsar el botón ```Mostrar solo nombres de los jugadores```, se listarán 
 *Captura de pantalla del fin de la HU2* &#8593;
 
 
-
+---
 
 
 ### ***La historia de usuario 4***
@@ -849,36 +811,9 @@ Se han añadido las siguientes funciones en la clase Plantilla:
 - ```Plantilla.listarJugadores```
 - ```Plantilla.imprimeTodosJugadores```
 
-**```Plantilla.listarJugadores```**
-```
-Plantilla.listarJugadores = function () {
-    Plantilla.recupera(Plantilla.imprimeTodosJugadores);
-}
-```
-
-**```Plantilla.imprimeTodosJugadores```**
-```
-Plantilla.imprimeTodosJugadores = function (vector) {
-    
-    vector = vector || this.datosJugadoresNulos
-
-    if (typeof vector !== "object") vector = this.datosJugadoresNulos
-
-    // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj = Plantilla.plantillaTablaJugadores.cabecera
-    if (vector && Array.isArray(vector)) {
-        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualiza(e));
-    }
-    msj += Plantilla.plantillaTablaJugadores.pie
-
-    // Borrar toda la información de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)
-}
-```
-
 Para cada una de las funciones anteriores se han hecho las correspondientes pruebas TDD en la clase ```ms-plantilla-spec.js```.
 
-Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:
+**Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:**
 
 ```Plantilla.recupera```
 - debe llamar a la función callback con los datos descargados
@@ -890,5 +825,132 @@ Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:
 
 Tras pulsar el botón ```Mostrar todos los jugadores```, se listarán todos los datos de todos los jugadores en la BBDD.
 
-![Captura de pantalla del inicio de la HU4](./assets/img/fin_HU_4.png)
+![Captura de pantalla del fin de la HU4](./assets/img/fin_HU_4.png)
 *Captura de pantalla del fin de la HU4* &#8593;
+
+
+---
+
+
+## **Segundo incremento**
+![Captura de pantalla del inicio del segundo incremento](./assets/img/inicio_segundo_incremento.png)
+*Captura de pantalla del inicio del segundo incremento* &#8593;
+
+![Captura de pantalla del final del segundo incremento](./assets/img/fin_segundo_incremento.png)
+*Captura de pantalla del final del segundo incremento* &#8593;
+
+
+---
+
+
+### ***La historia de usuario 6***
+![Captura de pantalla del inicio de la HU6](./assets/img/inicio_HU_6.png)
+*Captura de pantalla del inicio de la HU6* &#8593;
+
+Esta historia de usuario consiste en **Mostrar los datos de un determinado jugador**.
+Como usuario normal quiero mostrar los datos de un determinado jugador pulsando un botón para consultar los datos de un jugador específico.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.mostrar`
+- `Plantilla.recuperaUnJugador`
+- `Plantilla.imprimeUnJugador`
+- `Plantilla.jugadorComoTabla`
+- `Plantilla.plantillaTablaJugadores.cabeceraEspecifico`
+- `Plantilla.plantillaTablaJugadores.actualizaEspecifico`
+- `Plantilla.plantillaTablaJugadores.cuerpoEspecifico`
+
+Se han añadido las siguientes funciones a la clase *Front-end*:
+- `Frontend.Article.actualizarBoton`
+- `Frontend.Article.mostrar`
+- `Frontend.aniadirClase`
+- `Frontend.quitarClase`
+- `Frontend.Article.aniadirContenido`
+- `Frontend.Article.aniadirTitulo`
+- `Frontend.Article.borrar`
+- `Frontend.Article.borrarContenido`
+- `Frontend.Article.borrarTitulo`
+
+Para cada una de las funciones anteriores se han hecho las correspondientes pruebas TDD en la clase ```ms-plantilla-spec.js``` y ```front-end-spec.js```.
+
+**Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:**
+
+```Plantilla.imprimeUnJugador```
+- Mostrar datos nulos cuando le pasamos un valor nulo
+
+```Plantilla.recuperaJugadorBuscadoPorAspecto```
+- devuelve un vector vacío cuando no se encuentra el jugador buscado
+
+```Frontend.Article.actualizar```
+- para títulos y contenidos nulos, debe dejar vacíos las correspondientes secciones del article
+- Debe actualizar el titulo y el contenido de las secciones del article
+- Debe devolver el propio objeto
+
+```Frontend.aniadirClase```
+- no da error con un elemento que NO tiene ninguna clase
+- no da error con un elemento que tiene la misma clase que queremos añadir
+- no da error con un elemento que NO tiene la clase que queremos añadir
+
+```Frontend.quitarClase```
+- no da error con un elemento que NO tiene ninguna clase
+- no da error con un elemento que tiene alguna clase, pero no la que queremos quitar
+- no da error con un elemento que tiene la clase que queremos quitar
+
+
+Tras pulsar el botón ```Mostrar```, que aparece al lado de cada jugador en la lista de todos los jugadores se listarán todos los datos del jugador en la BBDD.
+
+![Captura de pantalla del fin de la HU6](./assets/img/fin_HU_6_1.png)
+*Captura de pantalla del fin de la HU6* &#8593;
+![Captura de pantalla del fin de la HU6](./assets/img/fin_HU_6_2.png)
+*Captura de pantalla del fin de la HU6* &#8593;
+
+
+---
+
+
+### ***La historia de usuario 8***
+
+![Captura de pantalla del inicio de la HU8](./assets/img/inicio_HU_8.png)
+*Captura de pantalla del inicio de la HU8* &#8593;
+
+Esta historia de usuario consiste en **Mostrar un listado de los jugadores buscados por nombre**.
+Como usuario normal quiero mostrar todos los datos de los jugadores cuyo nombre cumple con el criterio de la busqueda para consultar los datos de un jugador específico.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.jugadorBuscado`
+- `Plantilla.recuperaJugadorBuscado`
+
+**Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:**
+
+```Plantilla.recuperaJugadorBuscado```
+- devuelve un vector vacío cuando no se encuentra el jugador buscado
+
+Tras escribir el nombre o el/los apellido/s en el campo de busqueda y pulsar el botón ```Buscar por nombre```, se listarán todos los datos del jugador que tienen el mismo nombre o apellido/s en la BBDD.
+
+![Captura de pantalla del fin de la HU8](./assets/img/fin_HU_8.png)
+*Captura de pantalla del fin de la HU8* &#8593;
+
+
+---
+
+
+### ***La historia de usuario 10***
+
+![Captura de pantalla del inicio de la HU10](./assets/img/inicio_HU_10.png)
+*Captura de pantalla del inicio de la HU10* &#8593;
+
+Esta historia de usuario consiste en **Mostrar un listado de los jugadores buscados por varios aspectos**.
+Como usuario normal quiero mostrar todos los datos de los jugadores que cumplen con el varios criterios de la busqueda para consultar los datos de varios jugadores.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.jugadorBuscadoPorAspecto`
+- `Plantilla.recuperaJugadorBuscadoPorAspecto`
+
+**Se han hecho las diferentes pruebas TDD segun la funcionalidad de cada función:**
+
+```Plantilla.recuperaJugadorBuscadoPorAspecto```
+- devuelve un vector vacío cuando no se encuentra el jugador buscado
+
+Tras escribir los aspectos que se se buscan en los jugadores en los campos de busqueda y pulsar el botón ```Buscar por aspecto```, se listarán todos los datos del jugador que tienen los mismos aspectos en la BBDD.
+
+![Captura de pantalla del fin de la HU10](./assets/img/fin_HU_10.png)
+*Captura de pantalla del fin de la HU10* &#8593;

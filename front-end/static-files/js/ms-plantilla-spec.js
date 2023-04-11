@@ -220,8 +220,7 @@ describe("Plantilla.recuperaJugadorBuscadoPorAspecto", function() {
       }
       await Plantilla.recuperaJugadorBuscadoPorAspecto("Jugador Inexistente", "Jugador Inexistente", "Jugador Inexistente", callBackFn);
     });
-  });
-
+});
 
 /*
 IMPORTANTE
