@@ -190,19 +190,19 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
     <tbody>`;
 
     // Cabecera de la tabla
-Plantilla.plantillaTablaJugadores.cabeceraEspecifico = `<table width="100%" class="listado_jugadores">
-<thead>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Apellidos</th>
-    <th>Fecha de nacimiento</th>
-    <th>Dirección</th>
-    <th>Número participaciones</th>
-    <th>Años participación</th>
-    <th>Color cinturón</th>
-    <th>Nombre del gimnasio</th>
-</thead>
-<tbody>`;
+    Plantilla.plantillaTablaJugadores.cabeceraEspecifico = `<table width="100%" class="listado_jugadores">
+    <thead>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Fecha de nacimiento</th>
+        <th>Dirección</th>
+        <th>Número participaciones</th>
+        <th>Años participación</th>
+        <th>Color cinturón</th>
+        <th>Nombre del gimnasio</th>
+    </thead>
+    <tbody>`;
 
 // Cabecera de la tabla para solo los nombres
 Plantilla.plantillaTablaJugadores.cabeceraNombres = `<table width="100%" class="listado_jugadores">
@@ -351,6 +351,24 @@ Plantilla.recuperaUnJugador = async function (idJugador, callBackFn) {
     }
 }
 
+Plantilla.recuperaJugadorBuscado = async function (nombreBuscado, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
+        const response = await fetch(url);
+        let vectorJugadores = null
+        if (response) {
+            vectorJugadores = await response.json()
+            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === nombreBuscado)
+            callBackFn(filtro)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+
+    
+}
+
 /**
  * Función para mostrar los datos de todos los jugadores
  * que se han recuperado de la BBDD
@@ -414,6 +432,22 @@ Plantilla.imprimeUnJugador = function (jugador) {
     }
 }
 
+Plantilla.imprimirJugadorBuscado = function(nombreBuscado) {
+    if (!nombreBuscado || typeof nombreBuscado !== "object") {
+        elementoTitulo.innerHTML = "Mostrar los datos del jugador";
+
+    } else {
+        let msj = Plantilla.jugadorComoTabla(nombreBuscado);
+
+        //let msj = Plantilla.jugadorComoFormulario(jugador);
+        //Borrar toda la información de Article y la sustituyo por la que me interesa
+        Frontend.Article.actualizarBoton("Mostrar los datos del jugador", msj)
+
+        //Actualiza el objeto que guarda los datos mostrados
+        //Plantilla.almacenaDatos(nombreBuscado)
+    }
+}
+
 /**
  * Función principal para responder al evento de elegir la opción "Home"
  */
@@ -443,9 +477,13 @@ Plantilla.listarNombresJugadores = function () {
 }
 
 /**
- * Una función que muestra los datos de un jugador especifico
+ * Función que muestra los datos de un jugador especifico
  * @param {string} idJugador id del jugador
  */
 Plantilla.mostrar = function (idJugador) {
     this.recuperaUnJugador(idJugador, this.imprimeUnJugador);
+}
+
+Plantilla.jugadorBuscado = function (nombreBuscado) {
+    this.recuperaJugadorBuscado(nombreBuscado, this.imprimeTodosJugadores); 
 }

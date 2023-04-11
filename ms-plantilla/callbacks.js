@@ -104,6 +104,21 @@ const CB_MODEL_SELECTS = {
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })
         }
+    },
+
+    getPorNombre: async (req, res) => {
+        try {
+            let jugador = await client.query(
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.nombreBuscado))
+            )
+
+            CORS(res)
+                .status(200)
+                .json(jugador)
+            
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
+        }
     }
 }
 

@@ -57,5 +57,23 @@ table.listado_jugadores {
     width: 100%;
 }
 
- 
+.btn {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 1px solid rgba(0, 0, 100, 0.8);
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 3px;
+  }
+  
+  .btn:hover {
+    background-color: rgba(0, 0, 100, 0.3);
+  }
+   
 

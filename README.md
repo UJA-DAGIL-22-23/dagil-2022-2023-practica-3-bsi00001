@@ -593,8 +593,8 @@ Contenido del tablero Trello y la base de datos de Fauna antes de empezar los in
     apellidos: "Monzon Vazquez"
   },
   fecha_nacimiento: {
-    dia: 10,
-    mes: 1,
+    dia: 29,
+    mes: 8,
     año: 2000
   },
   direccion: {
