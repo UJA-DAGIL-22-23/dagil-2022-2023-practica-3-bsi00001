@@ -443,18 +443,6 @@ Plantilla.imprimeSoloNombres = function (vector) {
 }
 
 Plantilla.imprimeOrdenados = function(vector) {
-    /*vector.sort(function(a, b) {
-        let nombreA = a.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
-        let nombreB = b.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
-        if (nombreA < nombreB) {
-            return -1;
-        }
-        if (nombreA > nombreB) {
-            return 1;
-        }
-        return 0;
-    });*/
-    
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
     if (vector && Array.isArray(vector)) {

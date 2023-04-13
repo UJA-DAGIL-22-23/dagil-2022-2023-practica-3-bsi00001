@@ -954,3 +954,42 @@ Tras escribir los aspectos que se se buscan en los jugadores en los campos de bu
 
 ![Captura de pantalla del fin de la HU10](./assets/img/fin_HU_10.png)
 *Captura de pantalla del fin de la HU10* &#8593;
+
+
+---
+
+
+## **Tercer incremento**
+
+![Captura de pantalla del inicio del tercer incremento](./assets/img/inicio_tercer_incremento.png)
+*Captura de pantalla del inicio del tercer incremento* &#8593;
+
+
+---
+
+
+### ***La historia de usuario 3***
+
+![Captura de pantalla del inicio de la HU3](./assets/img/inicio_HU_3.png)
+*Captura de pantalla del inicio de la HU10* &#8593;
+
+Esta historia de usuario consiste en **Mostrar un listado de los nombres de todos los jugadores ordenados alfabéticamente**.
+Como usuario normal quiero listar los nombres de los jugadores ordenados alfabéticamente consultar los datos de los jugadores de forma más fácil.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.listarNombresOrdenados`
+- `Plantilla.imprimeOrdenados`
+
+**Se han hecho las diferentes pruebas TDD según la funcionalidad de cada función:**
+```Plantilla.imprimeOrdenados```
+- Mostrar datos nulos cuando le pasamos vector nulo
+- Mostrar datos nulos cuando le pasamos un valor que no es un objeto
+
+Tras pulsar el botón ```Mostrar solo nombres ordenados alfabéticamente```, se listarán todos los nombres de todos los jugadores ordendos alfabéticamente.
+
+![Captura de pantalla del fin de la HU3](./assets/img/fin_HU_3.png)
+*Captura de pantalla del fin de la HU3* &#8593;
+
+
+---
+
