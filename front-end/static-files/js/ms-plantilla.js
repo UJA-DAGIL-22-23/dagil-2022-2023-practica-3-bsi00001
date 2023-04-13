@@ -306,6 +306,10 @@ Plantilla.plantillaTablaJugadores.actualizaNombres = function (jugador) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
 }
 
+Plantilla.plantillaTablaJugadores.actualizaNombresOrdenados = function (jugador) {
+    return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
+}
+
 /**
  * Función que recupera todos los jugadores llamando al MS Plantilla 
  * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
@@ -438,6 +442,30 @@ Plantilla.imprimeSoloNombres = function (vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
 }
 
+Plantilla.imprimeOrdenados = function(vector) {
+    vector.sort(function(a, b) {
+        let nombreA = a.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+        let nombreB = b.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+        if (nombreA < nombreB) {
+            return -1;
+        }
+        if (nombreA > nombreB) {
+            return 1;
+        }
+        return 0;
+    });
+    
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
+    if (vector && Array.isArray(vector)) {
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualizaNombresOrdenados(e));
+    }
+    msj += Plantilla.plantillaTablaJugadores.pie
+
+    // Borrar toda la información del Article y la sustituyo por la que ma interesa
+    Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores ordenados", msj)
+}
+
 Plantilla.almacenaDatos = function (jugador) {
     Plantilla.jugadorMostrado = jugador;
 }
@@ -512,4 +540,8 @@ Plantilla.jugadorBuscado = function (nombreBuscado) {
  */
 Plantilla.jugadorBuscadoPorAspecto = function (aspecto1, aspecto2, aspecto3) {
     this.recuperaJugadorBuscadoPorAspecto(aspecto1, aspecto2, aspecto3, this.imprimeTodosJugadores); 
+}
+
+Plantilla.listarNombresOrdenados = function() {
+    Plantilla.recupera(Plantilla.imprimeOrdenados);
 }

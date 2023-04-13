@@ -17,6 +17,7 @@ const TITULO_IMPRIME_TODOS_JUGADORES = "Plantilla del listados de los datos de t
 const TITULO_IMPRIME_NOMBRES_JUGADORES = "Plantilla del listado de los nombres de todos los jugadores"
 const TITULO_IMPRIME_DATOS_JUGADOR = "Mostrar los datos del jugador"
 const OBJETO_VACIO = '';
+const TITULO_IMPRIME_NOMBRES_ORDENADOS = "Plantilla del listado de los nombres de todos los jugadores ordenados"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -221,6 +222,15 @@ describe("Plantilla.recuperaJugadorBuscadoPorAspecto", function() {
       await Plantilla.recuperaJugadorBuscadoPorAspecto("Jugador Inexistente", "Jugador Inexistente", "Jugador Inexistente", callBackFn);
     });
 });
+
+describe("Plantilla.imprimeOrdenados: ", function() {
+  it("Mostrar datos nulos cuando le pasamos vector nulo", 
+      function() {
+          Plantilla.imprimeOrdenados([])
+          expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS)
+          expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+  })
+})
 
 /*
 IMPORTANTE
