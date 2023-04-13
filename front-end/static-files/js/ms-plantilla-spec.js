@@ -18,6 +18,7 @@ const TITULO_IMPRIME_NOMBRES_JUGADORES = "Plantilla del listado de los nombres d
 const TITULO_IMPRIME_DATOS_JUGADOR = "Mostrar los datos del jugador"
 const OBJETO_VACIO = '';
 const TITULO_IMPRIME_NOMBRES_ORDENADOS = "Plantilla del listado de los nombres de todos los jugadores ordenados"
+const TITULO_IMPRIME_NOMBRES_ORDENADOS_CRITERIO = "Plantilla del listados de los datos de todos los jugadores ordenado según un criterio"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -244,6 +245,22 @@ describe("Plantilla.imprimeOrdenados: ", function() {
       function() {
           Plantilla.imprimeOrdenados(10)
           expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS)
+          expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+  })
+})
+
+describe("Plantilla.imprimeVariosOrdenados: ", function() {
+  it("Mostrar datos nulos cuando le pasamos vector nulo", 
+      function() {
+          Plantilla.imprimeVariosOrdenados([])
+          expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS_CRITERIO)
+          expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+  })
+
+  it("Mostrar datos nulos cuando le pasamos un valor que no es un objeto",
+      function() {
+          Plantilla.imprimeVariosOrdenados(10)
+          expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS_CRITERIO)
           expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
   })
 })
