@@ -83,13 +83,8 @@ Plantilla.plantillaFormularioJugador.formulario = `<form method='post' action=''
     </tbody>
 </table>
 </form>`;
-/*
-<td>
-                <div><a href="javascript:Personas.editar()" class="opcion-secundaria mostrar">Editar</a></div>
-                <div><a href="javascript:Personas.guardar()" class="opcion-terciaria editar ocultar">Guardar</a></div>
-                <div><a href="javascript:Personas.cancelar()" class="opcion-terciaria editar ocultar">Cancelar</a></div>
-            </td>
-*/
+
+
 Plantilla.plantillaFormularioJugador.actualiza = function (jugador) {
     return Plantilla.sustituyeTags(this.formulario, jugador);
 }
@@ -187,10 +182,10 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
         <th>Nombre del gimnasio</th>
         <th>Acción</th>
     </thead>
-    <tbody>`;
+<tbody>`;
 
-    // Cabecera de la tabla
-    Plantilla.plantillaTablaJugadores.cabeceraEspecifico = `<table width="100%" class="listado_jugadores">
+// Cabecera de la tabla
+Plantilla.plantillaTablaJugadores.cabeceraEspecifico = `<table width="100%" class="listado_jugadores">
     <thead>
         <th>ID</th>
         <th>Nombre</th>
@@ -202,7 +197,7 @@ Plantilla.plantillaTablaJugadores.cabecera = `<table width="100%" class="listado
         <th>Color cinturón</th>
         <th>Nombre del gimnasio</th>
     </thead>
-    <tbody>`;
+<tbody>`;
 
 // Cabecera de la tabla para solo los nombres
 Plantilla.plantillaTablaJugadores.cabeceraNombres = `<table width="100%" class="listado_jugadores">
@@ -298,14 +293,19 @@ Plantilla.plantillaTablaJugadores.actualizaEspecifico = function (jugador) {
 }
 
 /**
- * Actualiza el cuerpo de la tabla con los datos de el jugadores que se le pasa
+ * Actualiza el cuerpo de la tabla con los datos del jugadores que se le pasa
  * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
- * @returns La plantilla des cuerpo de la tabla con los datos actualizados
+ * @returns La plantilla de cuerpo de la tabla con los datos actualizados
  */
 Plantilla.plantillaTablaJugadores.actualizaNombres = function (jugador) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
 }
 
+/**
+ * Actualiza el cuerpo de la tabla con los datos del jugador que se le psas
+ * @param {Jugador} jugador Objeto con los datos de la persona que queremos escribir el TR
+ * @returns La plantilla de cuerpo de la tabla con los datos actualizados
+ */
 Plantilla.plantillaTablaJugadores.actualizaNombresOrdenados = function (jugador) {
     return Plantilla.sustituyeTags(this.cuerpoNombres, jugador)
 }
@@ -442,6 +442,10 @@ Plantilla.imprimeSoloNombres = function (vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores", msj)
 }
 
+/**
+ * Función que imprime todos los datos de todos los jugadores que se recuperan de la BBDD ordenados alfabéticamente
+ * @param {vector_de_jugadores} vector 
+ */
 Plantilla.imprimeOrdenados = function(vector) {
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaTablaJugadores.cabeceraNombres
@@ -466,14 +470,25 @@ Plantilla.imprimeOrdenados = function(vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores ordenados", msj)
 }
 
+/**
+ * Función que devuelve el numero pasado con dos cifras si no tiene
+ * @param {entero} num numero para saber si es de una cifra o no
+ * @returns devuelve el numero con dos cifras si no tiene
+ */
 Plantilla.cerear = function(num) {
     if (num < 10) {
-    return "0" + num.toString();
+        return "0" + num.toString();
     } else {
-    return num.toString();
+        return num.toString();
     }
 }
 
+
+/**
+ * Función que imprime todos los jugadores ordenado según como desee el usuario
+ * @param {vector_de_jugadores} vector Array con todos los datos de todos los jugadores
+ * @param {string} orden El tipo de orden deseado para ordenar los jugadores en la tabla
+ */
 Plantilla.imprimeVariosOrdenados = function(vector, orden) {
     vector = vector || this.datosJugadoresNulos
 
@@ -522,6 +537,10 @@ Plantilla.imprimeVariosOrdenados = function(vector, orden) {
     Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores ordenado según un criterio" , msj)
 }
 
+/**
+ * Función que almacena en una variable el jugador mostrado actualmente
+ * @param {vector} jugador Los datos del jugador mostrado
+ */
 Plantilla.almacenaDatos = function (jugador) {
     Plantilla.jugadorMostrado = jugador;
 }
@@ -598,10 +617,17 @@ Plantilla.jugadorBuscadoPorAspecto = function (aspecto1, aspecto2, aspecto3) {
     this.recuperaJugadorBuscadoPorAspecto(aspecto1, aspecto2, aspecto3, this.imprimeTodosJugadores); 
 }
 
+/**
+ * Funcion que lista los nombres de los usuario ordenados alfabéticamente
+ */
 Plantilla.listarNombresOrdenados = function() {
     Plantilla.recupera(Plantilla.imprimeOrdenados);
 }
 
+/**
+ * Función que ordena los datos según como desee el usuario
+ * @param {string} orden El orden deseado para ordenar los datos
+ */
 Plantilla.listarOrdenados = function(orden) {
     Plantilla.recupera(Plantilla.imprimeVariosOrdenados, orden);
 }

@@ -971,7 +971,7 @@ Tras escribir los aspectos que se se buscan en los jugadores en los campos de bu
 ### ***La historia de usuario 3***
 
 ![Captura de pantalla del inicio de la HU3](./assets/img/inicio_HU_3.png)
-*Captura de pantalla del inicio de la HU10* &#8593;
+*Captura de pantalla del inicio de la HU3* &#8593;
 
 Esta historia de usuario consiste en **Mostrar un listado de los nombres de todos los jugadores ordenados alfabéticamente**.
 Como usuario normal quiero listar los nombres de los jugadores ordenados alfabéticamente consultar los datos de los jugadores de forma más fácil.
@@ -992,4 +992,32 @@ Tras pulsar el botón ```Mostrar solo nombres ordenados alfabéticamente```, se 
 
 
 ---
+
+
+### ***La historia de usuario 5***
+
+![Captura de pantalla del inicio de la HU5](./assets/img/inicio_HU_5.png)
+*Captura de pantalla del inicio de la HU5* &#8593;
+
+Esta historia de usuario consiste en **Ordenar los datos de todos los usuarios según como desee el usuario**.
+Como usuario normal quiero mostrar los datos de los usuarios ordenados según uno de varios criterios que desee el usuarios para consultar los usuarios de forma fácil.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.listarOrdenados`
+- `Plantilla.imprimeVariosOrdenados`
+- `Plantilla.cerear`
+
+**Se han hecho las diferentes pruebas TDD según la funcionalidad de cada función:**
+```Plantilla.imprimeVariosOrdenados```
+- Mostrar datos nulos cuando le pasamos vector nulo
+- Mostrar datos nulos cuando le pasamos un valor que no es un objeto
+
+Tras pasar el cursor por encima del botón ```Opciones de listar datos por```, se listarán unas opciones que el usuario puede elegir entre ellas para ordenar los datos.
+
+![Captura de pantalla del fin de la HU5](./assets/img/fin_HU_5.png)
+*Captura de pantalla del fin de la HU5* &#8593;
+
+
+---
+
 
