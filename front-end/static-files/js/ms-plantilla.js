@@ -84,15 +84,6 @@ Plantilla.plantillaFormularioJugador.formulario = `<form method='post' action=''
 </table>
 </form>`;
 
-
-Plantilla.plantillaFormularioJugador.actualiza = function (jugador) {
-    return Plantilla.sustituyeTags(this.formulario, jugador);
-}
-
-Plantilla.jugadorComoFormulario = function (jugador) {
-    return Plantilla.plantillaFormularioJugador.actualiza(jugador);
-}
-
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
  * @param {string} ruta Ruta a descargar
@@ -506,7 +497,6 @@ Plantilla.cerear = function(num) {
         return num.toString();
     }
 }
-
 
 /**
  * Función que imprime todos los jugadores ordenado según como desee el usuario

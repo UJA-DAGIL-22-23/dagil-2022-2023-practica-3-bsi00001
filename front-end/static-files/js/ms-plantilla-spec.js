@@ -274,6 +274,46 @@ describe("Plantilla.recuperaJugadorBuscadoPorAspectoExacto", function() {
   });
 });
 
+describe("Plantilla.recuperaUnJugador: ", function() {
+  let callBackFn = jasmine.createSpy("callBackFn");
+  let idJugador = "123";
+
+  beforeEach(function() {
+    spyOn(window, "fetch").and.returnValue(
+      Promise.resolve({
+        json: function() {
+          return Promise.resolve({ name: "player1" });
+        }
+      })
+    );
+  });
+
+  it("debe llamar a la API del gateway con la URL correcta", async function() {
+    await Plantilla.recuperaUnJugador(idJugador, callBackFn);
+
+    expect(window.fetch).toHaveBeenCalledWith(
+      Frontend.API_GATEWAY + "/plantilla/getPorId/" + idJugador
+    );
+  });
+
+  it("debe llamar a la función callback con los datos recuperados", async function() {
+    await Plantilla.recuperaUnJugador(idJugador, callBackFn);
+
+    expect(callBackFn).toHaveBeenCalledWith({ name: "player1" });
+  });
+});
+
+describe("Plantilla.cerear", () => {
+  it("devuelve un número con dos cifras si el número pasado es menor que 10", () => {
+    expect(Plantilla.cerear(5)).toBe("05");
+  });
+
+  it("devuelve un número sin cambios si el número pasado es mayor o igual a 10", () => {
+    expect(Plantilla.cerear(15)).toBe("15");
+  });
+});
+
+
 /*
 IMPORTANTE
 ==========
