@@ -52,38 +52,6 @@ Plantilla.jugadorComoTabla = function (jugador) {
         + Plantilla.plantillaTablaJugadores.pie;
 }
 
-Plantilla.plantillaFormularioJugador = {}
-
-Plantilla.plantillaFormularioJugador.formulario = `<form method='post' action=''>
-<table width="100%" class="listado_jugadores">
-    <thead>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellidos</th>
-        <th>Fecha de nacimiento</th>
-        <th>Dirección</th>
-        <th>Número participaciones</th>
-        <th>Años participación</th>
-        <th>Color cinturón</th>
-        <th>Nombre del gimnasio</th>
-        <th>Acción</th>
-    </thead>
-    <tbody>
-        <tr title="${Plantilla.plantillaTags.ID}">
-            <td><input type="text" class="form-persona-elemento disabled" id="form-persona-id" value="${Plantilla.plantillaTags.ID}" name="id_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-nombre" required value="${Plantilla.plantillaTags.NOMBRE}" name="nombre_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-apellidos" required value="${Plantilla.plantillaTags.APELLIDOS}" name="apellidos_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-fecha-nacimiento" required value="${Plantilla.plantillaTags["FECHA_NACIMIENTO"]}" name="fecha_nacimiento_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-direccion" required value="${Plantilla.plantillaTags.DIRECCION}" name="direccion_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-numero-participaciones" required value="${Plantilla.plantillaTags.NUMERO_PARTICIPACIONES}" name="numero_participaciones_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-anios-participacion" required value="${Plantilla.plantillaTags["AÑOS PARTICIPACION"]}" name="anios_participacion_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-color-cinturon" required value="${Plantilla.plantillaTags.COLOR_CINTURON}" name="color_cinturon_jugador"/></td>
-            <td><input type="text" class="form-persona-elemento editable" disabled id="form-persona-nombre-gimnasio" required value="${Plantilla.plantillaTags.NOMBRE_GIMNASIO}" name="nombre_gimnasio_jugador"/></td>
-        </tr>
-    </tbody>
-</table>
-</form>`;
-
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
  * @param {string} ruta Ruta a descargar

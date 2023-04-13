@@ -34,6 +34,10 @@ Frontend.Article.borrarTitulo = function () {
     return this;
 }
 
+/**
+ * Borrar contenido del article
+ * @returns Frontend.Article para poder concatenar llamadas
+ */
 Frontend.Article.borrarContenido = function () {
     document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML = "";
     return this;

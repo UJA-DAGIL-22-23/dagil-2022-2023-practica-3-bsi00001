@@ -964,6 +964,9 @@ Tras escribir los aspectos que se se buscan en los jugadores en los campos de bu
 ![Captura de pantalla del inicio del tercer incremento](./assets/img/inicio_tercer_incremento.png)
 *Captura de pantalla del inicio del tercer incremento* &#8593;
 
+![Captura de pantalla del fin del tercer incremento](./assets/img/fin_tercer_incremento.png)
+*Captura de pantalla del fin del tercer incremento* &#8593;
+
 
 ---
 
@@ -1021,3 +1024,25 @@ Tras pasar el cursor por encima del botón ```Opciones de listar datos por```, s
 ---
 
 
+### ***La historia de usuario 11***
+
+![Captura de pantalla del inicio de la HU11](./assets/img/inicio_HU_11.png)
+*Captura de pantalla del inicio de la HU11* &#8593;
+
+Esta historia de usuario consiste en **Buscar los usuarios que cumplen varios criterios simultáneamente**.
+Como usuario normal quiero mostrar los datos de los usuarios que cumplen los criterios de busqueda (nombre, provincia y color del cinturón) para consultar unos usuario especificos.
+
+Se han añadido las siguientes funciones a la clase *ms-plantilla.js*:
+- `Plantilla.jugadorBuscadoPorAspectoExactos`
+- `Plantilla.recuperaJugadorBuscadoPorAspectoExacto`
+
+**Se han hecho las diferentes pruebas TDD según la funcionalidad de cada función:**
+```Plantilla.recuperaJugadorBuscadoPorAspectoExacto```
+- devuelve un vector vacío cuando no se encuentra el jugador buscado
+
+Tras escribir los aspectos que se se buscan en los jugadores en los campos de busqueda y pulsar el botón ```Buscar por aspecto exactos```, se listarán todos los datos de los jugadores que cumplen los criterios.
+
+![Captura de pantalla del fin de la HU11](./assets/img/fin_HU_11.png)
+*Captura de pantalla del fin de la HU11* &#8593;
+
+---

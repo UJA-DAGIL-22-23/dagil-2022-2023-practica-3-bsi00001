@@ -129,3 +129,43 @@ describe("Frontend.quitarClase: ", function () {
 
 })
 
+describe("Frontend.Article.borrarTitulo", function() {
+    it("debe borrar el título del article", function() {
+      Frontend.Article.borrarTitulo();
+  
+      expect(document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML).toBe("");
+    });
+  });
+  
+
+describe("Frontend.Article.borrarContenido", function() {
+    it("debe borrar el contenido del article", function() {
+      Frontend.Article.borrarContenido();
+  
+      expect(document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML).toBe("");
+    });
+  });
+  
+
+
+describe("Frontend.Article.borrar", function() {
+    it("debe borrar el título y el contenido del article", function() {
+      Frontend.Article.borrar();
+  
+      expect(document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TITULO).innerHTML).toBe("");
+      expect(document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML).toBe("");
+    });
+  });
+
+
+describe("Frontend.Article.aniadirContenido", function() {
+    it("debe añadir el contenido al article", function() {
+      Frontend.Article.borrarContenido(); // Aseguramos que no hay contenido previo
+      
+      // Añadimos contenido y comprobamos que se ha añadido correctamente
+      var contenido = "<p>Contenido de prueba</p>";
+      Frontend.Article.aniadirContenido(contenido);
+      var contenidoArticulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO).innerHTML;
+      expect(contenidoArticulo).toContain(contenido);
+    });
+});
