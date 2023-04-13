@@ -392,9 +392,33 @@ Plantilla.recuperaJugadorBuscadoPorAspecto = async function (aspecto1, aspecto2,
         let vectorJugadores = null
         if (response) {
             vectorJugadores = await response.json()
-            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === aspecto1 && jugador.data.nombre_completo.apellidos === aspecto1 && jugador.data.fecha_nacimiento.dia === aspecto1 && jugador.data.fecha_nacimiento.mes === aspecto1 && jugador.data.fecha_nacimiento.año === aspecto1 && jugador.data.direccion.calle === aspecto1 && jugador.data.direccion.localidad === aspecto1 && jugador.data.direccion.provincia === aspecto1 && jugador.data.direccion.pais === aspecto1 && jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto1 && jugador.data.años_participacion_juegos_olimpicos === aspecto1 && jugador.data.color_cinturon === aspecto1 && jugador.data.nombre_gimnasio === aspecto1 &&
-                jugador.data.nombre_completo.nombre === aspecto2 && jugador.data.nombre_completo.apellidos === aspecto2 && jugador.data.fecha_nacimiento.dia === aspecto2 && jugador.data.fecha_nacimiento.mes === aspecto2 && jugador.data.fecha_nacimiento.año === aspecto2 && jugador.data.direccion.calle === aspecto2 && jugador.data.direccion.localidad === aspecto2 && jugador.data.direccion.provincia === aspecto2 && jugador.data.direccion.pais === aspecto2 && jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto2 && jugador.data.años_participacion_juegos_olimpicos === aspecto2 && jugador.data.color_cinturon === aspecto2 && jugador.data.nombre_gimnasio === aspecto2 &&
-                jugador.data.nombre_completo.nombre === aspecto3 && jugador.data.nombre_completo.apellidos === aspecto3 && jugador.data.fecha_nacimiento.dia === aspecto3 && jugador.data.fecha_nacimiento.mes === aspecto3 && jugador.data.fecha_nacimiento.año === aspecto3 && jugador.data.direccion.calle === aspecto3 && jugador.data.direccion.localidad === aspecto3 && jugador.data.direccion.provincia === aspecto3 && jugador.data.direccion.pais === aspecto3 && jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto3 && jugador.data.años_participacion_juegos_olimpicos === aspecto3 && jugador.data.color_cinturon === aspecto3 && jugador.data.nombre_gimnasio === aspecto3)
+            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === aspecto1 || jugador.data.nombre_completo.apellidos === aspecto1 || jugador.data.fecha_nacimiento.dia === aspecto1 || jugador.data.fecha_nacimiento.mes === aspecto1 || jugador.data.fecha_nacimiento.año === aspecto1 || jugador.data.direccion.calle === aspecto1 || jugador.data.direccion.localidad === aspecto1 || jugador.data.direccion.provincia === aspecto1 || jugador.data.direccion.pais === aspecto1 || jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto1 || jugador.data.años_participacion_juegos_olimpicos === aspecto1 || jugador.data.color_cinturon === aspecto1 || jugador.data.nombre_gimnasio === aspecto1 &&
+                jugador.data.nombre_completo.nombre === aspecto2 || jugador.data.nombre_completo.apellidos === aspecto2 || jugador.data.fecha_nacimiento.dia === aspecto2 || jugador.data.fecha_nacimiento.mes === aspecto2 || jugador.data.fecha_nacimiento.año === aspecto2 || jugador.data.direccion.calle === aspecto2 || jugador.data.direccion.localidad === aspecto2 || jugador.data.direccion.provincia === aspecto2 || jugador.data.direccion.pais === aspecto2 || jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto2 || jugador.data.años_participacion_juegos_olimpicos === aspecto2 || jugador.data.color_cinturon === aspecto2 || jugador.data.nombre_gimnasio === aspecto2 &&
+                jugador.data.nombre_completo.nombre === aspecto3 || jugador.data.nombre_completo.apellidos === aspecto3 || jugador.data.fecha_nacimiento.dia === aspecto3 || jugador.data.fecha_nacimiento.mes === aspecto3 || jugador.data.fecha_nacimiento.año === aspecto3 || jugador.data.direccion.calle === aspecto3 || jugador.data.direccion.localidad === aspecto3 || jugador.data.direccion.provincia === aspecto3 || jugador.data.direccion.pais === aspecto3 || jugador.data.numero_particiapciones_Juegos_olimpicos === aspecto3 || jugador.data.años_participacion_juegos_olimpicos === aspecto3 || jugador.data.color_cinturon === aspecto3 || jugador.data.nombre_gimnasio === aspecto3)
+            callBackFn(filtro)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Geteway")
+        console.error(error)
+    }
+}
+
+/**
+ * Función que recupera todos los jugadores llamando al MS Plantilla
+ * Posteriormente, llama a la función callBackFn para trabajar con los datos recperados.
+ * @param {string} aspecto1 El primer aspecto que se busca
+ * * @param {string} aspecto2 El segundo aspecto que se busca
+ * * @param {string} aspecto3 El tercer aspecto que se busca
+ * @param {funcion} callBackFn Función a la que se llamará una vez recibidos los datos
+ */
+Plantilla.recuperaJugadorBuscadoPorAspectoExacto = async function (aspecto1, aspecto2, aspecto3, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/getTodos"
+        const response = await fetch(url);
+        let vectorJugadores = null
+        if (response) {
+            vectorJugadores = await response.json()
+            const filtro = vectorJugadores.data.filter(jugador => jugador.data.nombre_completo.nombre === aspecto1 && jugador.data.direccion.provincia === aspecto2 && jugador.data.color_cinturon === aspecto3)
             callBackFn(filtro)
         }
     } catch (error) {
@@ -610,7 +634,7 @@ Plantilla.jugadorBuscado = function (nombreBuscado) {
 }
 
 /**
- * Función que muestra el jugador con el nombre indicado
+ * Función que muestra el/los jugador/es con uno o varios aspectos indicados
  * @param {string} nombreBuscado El nombre del jugador buscado
  */
 Plantilla.jugadorBuscadoPorAspecto = function (aspecto1, aspecto2, aspecto3) {
@@ -630,4 +654,12 @@ Plantilla.listarNombresOrdenados = function() {
  */
 Plantilla.listarOrdenados = function(orden) {
     Plantilla.recupera(Plantilla.imprimeVariosOrdenados, orden);
+}
+
+/**
+ * Función que muestra el/los jugador/es con los aspectos indicados exactamente
+ * @param {string} nombreBuscado El nombre del jugador buscado
+ */
+Plantilla.jugadorBuscadoPorAspectoExactos = function (aspecto1, aspecto2, aspecto3) {
+    this.recuperaJugadorBuscadoPorAspectoExacto(aspecto1, aspecto2, aspecto3, this.imprimeTodosJugadores); 
 }
