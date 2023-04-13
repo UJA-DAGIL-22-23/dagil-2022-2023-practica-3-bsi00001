@@ -130,37 +130,46 @@ describe("Plantilla.mostrarAcercaDe: ", function () {
 })
 
 describe("Plantilla.recupera: ", function() {
-    let callBackFn = jasmine.createSpy("callBackFn");
-  
-    beforeEach(function() {
-      spyOn(window, "fetch").and.returnValue(
-        Promise.resolve({
-          json: function() {
-            return Promise.resolve({
-              data: [{ name: "player1" }, { name: "player2" }]
-            });
-          }
-        })
-      );
-    });
-  
-    it("debe llamar a la función callback con los datos descargados", async function() {
-      await Plantilla.recupera(callBackFn);
-  
-      expect(callBackFn).toHaveBeenCalledWith([
-        { name: "player1" },
-        { name: "player2" }
-      ]);
-    });
-  
-    it("debe llamar a la API del gateway con la URL correcta", async function() {
-      await Plantilla.recupera(callBackFn);
-  
-      expect(window.fetch).toHaveBeenCalledWith(
-        Frontend.API_GATEWAY + "/plantilla/getTodos"
-      );
-    });
+  let callBackFn = jasmine.createSpy("callBackFn");
+
+  beforeEach(function() {
+    spyOn(window, "fetch").and.returnValue(
+      Promise.resolve({
+        json: function() {
+          return Promise.resolve({
+            data: [{ name: "player1" }, { name: "player2" }]
+          });
+        }
+      })
+    );
   });
+
+  it("debe llamar a la función callback con los datos descargados y ordenados", async function() {
+    await Plantilla.recupera(callBackFn, 'nombre');
+
+    expect(callBackFn).toHaveBeenCalledWith([
+      { name: "player1" },
+      { name: "player2" }
+    ], 'nombre');
+  });
+
+  it("debe llamar a la función callback con los datos descargados y ordenados", async function() {
+    await Plantilla.recupera(callBackFn, 'fecha_nacimiento');
+
+    expect(callBackFn).toHaveBeenCalledWith([
+      { name: "player1" },
+      { name: "player2" }
+    ], 'fecha_nacimiento');
+  });
+
+  it("debe llamar a la API del gateway con la URL correcta", async function() {
+    await Plantilla.recupera(callBackFn, 'nombre');
+
+    expect(window.fetch).toHaveBeenCalledWith(
+      Frontend.API_GATEWAY + "/plantilla/getTodos"
+    );
+  });
+});
   
 
 describe("Plantilla.imprimeTodosJugadores: ", function() {

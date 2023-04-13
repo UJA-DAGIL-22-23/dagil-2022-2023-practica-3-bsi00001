@@ -314,7 +314,7 @@ Plantilla.plantillaTablaJugadores.actualizaNombresOrdenados = function (jugador)
  * Función que recupera todos los jugadores llamando al MS Plantilla 
  * @param {función} callBackFn Función a la que se llamará una vez recibidos los datos.
  */
-Plantilla.recupera = async function (callBackFn) {
+Plantilla.recupera = async function (callBackFn, orden) {
     let response = null
 
     // Intento conectar el microservicio Plantilla
@@ -331,7 +331,7 @@ Plantilla.recupera = async function (callBackFn) {
     let vectorJugadores = null
     if (response) {
         vectorJugadores = await response.json()
-        callBackFn(vectorJugadores.data)
+        callBackFn(vectorJugadores.data, orden)
     }
 }
 
@@ -466,6 +466,62 @@ Plantilla.imprimeOrdenados = function(vector) {
     Frontend.Article.actualizar("Plantilla del listado de los nombres de todos los jugadores ordenados", msj)
 }
 
+Plantilla.cerear = function(num) {
+    if (num < 10) {
+    return "0" + num.toString();
+    } else {
+    return num.toString();
+    }
+}
+
+Plantilla.imprimeVariosOrdenados = function(vector, orden) {
+    vector = vector || this.datosJugadoresNulos
+
+    if (typeof vector !== "object") vector = this.datosJugadoresNulos
+
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaTablaJugadores.cabecera
+    if (vector && Array.isArray(vector)) {
+        
+        vector.sort(function(a, b){
+            let campoA = null;
+            let campoB = null;
+            if(orden == 'fecha_nacimiento'){
+                campoA = a.data[orden].año + "" +  Plantilla.cerear(a.data[orden].mes) + "" + Plantilla.cerear(a.data[orden].dia)
+                campoB = b.data[orden].año + "" +  Plantilla.cerear(b.data[orden].mes) + "" + Plantilla.cerear(b.data[orden].dia)
+            }else if (orden == 'nombre'){
+                campoA = a.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+                campoB = b.data.nombre_completo.nombre.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+            } else if (orden == 'apellido'){
+                campoA = a.data.nombre_completo.apellidos.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+                campoB = b.data.nombre_completo.apellidos.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+            } else if (orden == 'provincia'){
+                campoA = a.data.direccion.provincia.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+                campoB = b.data.direccion.provincia.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+            } else if (orden == 'color_cinturon'){
+                campoA = a.data.color_cinturon.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+                campoB = b.data.color_cinturon.toUpperCase(); // convertir a mayúsculas para evitar problemas de ordenamiento
+            } else if (orden == 'numero_particiapciones_Juegos_olimpicos'){
+                campoA = a.data[orden] || 0;
+                campoB = b.data[orden] || 0;
+            }
+            if (campoA < campoB) {
+                return -1;
+            }
+            if (campoA > campoB) {
+                return 1;
+            }
+            return 0;
+        });
+        
+        vector.forEach(e => msj += Plantilla.plantillaTablaJugadores.actualiza(e));
+    }
+    msj += Plantilla.plantillaTablaJugadores.pie
+
+    // Borrar toda la información de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Plantilla del listados de los datos de todos los jugadores" , msj)
+}
+
 Plantilla.almacenaDatos = function (jugador) {
     Plantilla.jugadorMostrado = jugador;
 }
@@ -544,4 +600,8 @@ Plantilla.jugadorBuscadoPorAspecto = function (aspecto1, aspecto2, aspecto3) {
 
 Plantilla.listarNombresOrdenados = function() {
     Plantilla.recupera(Plantilla.imprimeOrdenados);
+}
+
+Plantilla.listarOrdenados = function(orden) {
+    Plantilla.recupera(Plantilla.imprimeVariosOrdenados, orden);
 }
