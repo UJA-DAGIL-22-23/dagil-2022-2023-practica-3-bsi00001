@@ -230,6 +230,13 @@ describe("Plantilla.imprimeOrdenados: ", function() {
           expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS)
           expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
   })
+
+  it("Mostrar datos nulos cuando le pasamos un valor que no es un objeto",
+      function() {
+          Plantilla.imprimeOrdenados(10)
+          expect(elementoTitulo.innerHTML).toBe(TITULO_IMPRIME_NOMBRES_ORDENADOS)
+          expect(elementoContenido.querySelector('tbody').innerHTML).toBe(OBJETO_VACIO)
+  })
 })
 
 /*
